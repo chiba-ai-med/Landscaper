@@ -16,4 +16,4 @@ jobs:
               uses: actions/checkout@v3
             - name: src/test.sh
               run: |
-                  src/test.sh
+                  echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u kokitsuyuzaki --password-stdin && src/test.sh
