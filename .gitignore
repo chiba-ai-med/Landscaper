@@ -19,6 +19,4 @@ output
 report
 logs
 benchmarks
-plot/hpbase
-plot/echinobase
 .conda

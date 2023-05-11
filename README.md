@@ -1,7 +1,7 @@
 # Landscaper
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.0.5-brightgreen.svg)](https://snakemake.github.io)
-[![DOI](https://zenodo.org/badge/571380791.svg)](https://zenodo.org/badge/latestdoi/571380791)
+[![DOI](https://zenodo.org/badge/634765201.svg)](https://zenodo.org/badge/latestdoi/634765201)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/build_test_push.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/dockerrun1.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/dockerrun2.yml/badge.svg)
@@ -13,7 +13,7 @@
 
 `Landscaper` consists of the rules below:
 
-![](https://github.com/kokitsuyuzaki/Landscaper/blob/main/plot/dag.png?raw=true)
+![](https://github.com/chiba-ai-med/Landscaper/blob/main/plot/dag.png?raw=true)
 
 # Pre-requisites (our experiment)
 - Snakemake: v7.24.0
