@@ -1,0 +1,19 @@
+name: Docker Pull/Run (koki/landscaper_component)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+    unit-test-job:
+        name: run unit-test job
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+            - name: docker run
+              run: |
+                  docker run koki/landscaper_component:latest python -c "import coniii; import snakemake; import sys; import numpy as np; import numba; import cython; import jupyter; import multiprocess; import matplotlib; import mpmath"

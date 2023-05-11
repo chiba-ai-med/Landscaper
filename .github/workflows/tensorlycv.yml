@@ -1,0 +1,19 @@
+name: Docker Pull/Run (landscaper in Docker Container)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+    unit-test-job:
+        name: run unit-test job
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+            - name: src/test.sh
+              run: |
+                  src/test.sh
