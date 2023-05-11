@@ -6,7 +6,7 @@
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/dockerrun1.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/dockerrun2.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/dockerrun3.yml/badge.svg)
-![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/tensorlycv.yml/badge.svg)
+![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/landscaper.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/release-please.yml/badge.svg)
 
 `Snakemake` workflow to perform Landscape Analysis
