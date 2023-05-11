@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Perform landscaper
-docker pull ghcr.io/kokitsuyuzaki/landscaper:main
+docker pull ghcr.io/chiba-ai-med/landscaper:main
 
 # docker run --rm -v $(pwd):/work ghcr.io/kokitsuyuzaki/tensorlycv:main \
 # -i /work/data/vaccine_tensor.npy -o /work/output \
