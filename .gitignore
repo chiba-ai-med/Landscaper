@@ -14,7 +14,7 @@
 .cache
 .fontconfig
 .snakemake
-data
+data/*
 output
 report
 logs

@@ -19,7 +19,8 @@ container: 'docker://koki/landscaper_component:20230511'
 # All Rules
 rule all:
 	input:
-		OUTDIR + '/BIN_DATA.npy'
+		OUTDIR + '/h.tsv',
+		OUTDIR + '/J.tsv'
 
 #############################################################
 # Checks for non-zero/non-empty tensor data and the data size
@@ -58,4 +59,16 @@ rule binarization:
 #############################################################
 # Parameter estimation for Energy Landscape
 #############################################################
-# rule coniii:
+rule coniii:
+	input:
+		OUTDIR + '/BIN_DATA.npy'
+	output:
+		OUTDIR + '/h.tsv',
+		OUTDIR + '/J.tsv'
+	benchmark:
+		OUTDIR + '/benchmarks/coniii.txt'
+	log:
+		OUTDIR + '/logs/coniii.log'
+	shell:
+		'src/coniii.sh {input} {output} >& {log}'
+
