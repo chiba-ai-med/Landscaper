@@ -10,4 +10,4 @@
 #SBATCH -p node03-06
 SLURM_RESTART_COUNT=2
 
-python src/myconiii.py $@
+Rscript src/status_network.R $@

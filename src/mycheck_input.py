@@ -20,7 +20,7 @@ if np.unique(mat).shape[0] == 1:
     quit()
 
 # Saving a Numpy array into a Numpy's Binary file
-np.save(outfile1, mat)
+np.savetxt(outfile1, mat, fmt="%d")
 
 # Binary Check
 if np.unique(mat).shape[0] == 2:

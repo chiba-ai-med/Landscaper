@@ -13,12 +13,12 @@ SLURM_RESTART_COUNT=2
 BIN_DATA=`cat $2`
 LARGE_DATA=`cat $3`
 
-if [ $BIN_DATA = 0 ]; then
+if [ $BIN_DATA = 1 ]; then
 	cp $1 $4
 else
-	if [ $LARGE_DATA = 0 ]; then
+	if [ $LARGE_DATA = 1 ]; then
 		# Median-based Binarization
-		python src/mymedian_binarization.py $1 $4
+		python3 src/mymedian_binarization.py $1 $4
 	else
 		# Semi-binary Matrix Factorization-based Binarization
 		Rscript src/smbf_binarization.R $1 $4

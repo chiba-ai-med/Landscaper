@@ -10,4 +10,4 @@
 #SBATCH -p node03-06
 SLURM_RESTART_COUNT=2
 
-python3 src/mycheck_input.py $@
+Rscript src/estimate_ising.R $@

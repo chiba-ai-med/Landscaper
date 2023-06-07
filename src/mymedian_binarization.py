@@ -17,4 +17,4 @@ med = np.median(mat, axis=0)
 binmat = (mat >= med).astype(int)
 
 # Saving a Numpy array into a Numpy's Binary file
-np.save(outfile, binmat)
+np.savetxt(outfile, binmat, fmt="%d")
