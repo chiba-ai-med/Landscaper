@@ -6,4 +6,4 @@ docker run --rm -v $(pwd):/work ghcr.io/chiba-ai-med/landscaper:main \
 --memgb=10
 
 # Test
-docker run --rm --entrypoint "bash" -v $(pwd):/work ghcr.io/chiba-ai-med/landscaper:main Rscript src/test.R
+docker run --rm --entrypoint "bash" -v $(pwd):/work ghcr.io/chiba-ai-med/landscaper:main R CMD BATCH --slave --vanilla src/test.R
