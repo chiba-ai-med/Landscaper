@@ -19,7 +19,7 @@ OUTDIR = config["outdir"]
 # TYPE = config[""]
 
 # Docker Container
-container: 'docker://koki/landscaper_component:20230606'
+container: 'docker://koki/landscaper_component:20230608'
 
 # All Rules
 rule all:
