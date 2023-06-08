@@ -16,4 +16,4 @@ jobs:
               uses: actions/checkout@v3
             - name: docker run
               run: |
-                  docker run koki/landscaper_component:latest python -c "import coniii; import snakemake; import sys; import numpy as np; import numba; import cython; import jupyter; import multiprocess; import matplotlib; import mpmath"
+                  docker run koki/landscaper_component:latest R -e "library('dcTensor'); library('IsingSampler'); library('igraph'); library('tidyverse'); library('RColorBrewer'); library('akima'); library('spatstat'); library('magick'); library('cowplot'); library('dendextend')" && python3 -c "import snakemake; import sys; import numpy as np" && snakemake -v

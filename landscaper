@@ -1,2 +1,67 @@
 #!/bin/bash
 
+# Help page
+showHelp() {
+    cat << EOF
+Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--memgb/-h/-v]
+Landscaper: Snakemake workflow to perform Energy Landscape Analysis
+
+    -i, -input,         --input                 Input file (e.g., data/vaccine_tensor.npy, mandatory)
+
+    -o, -outdir,        --outdir                Output directory (e.g., output, mandatory)
+
+    -c, -cores,         --cores                 Number of cores to use Snakemake (e.g., default value is 10, optional)
+
+    -m, -memgb,         --memgb                 Memory usage (GB, e.g., default value is 10, optional)
+
+    -h, -help,          --help                  Display help
+
+    -v, -version,       --version               Version of this workflow
+
+EOF
+}
+
+# Default Values
+INPUT=""
+OUTDIR=""
+CORES=10
+MEMGB=10
+VERSION="v1.1.0"
+
+# Command Argument Parsing
+while getopts i:o:c:m:h-:v- opt; do
+	optarg="$OPTARG"
+	[[ "$opt" = - ]] &&
+	    opt="-${OPTARG%%=*}" &&
+	    optarg="${OPTARG/${OPTARG%%=*}/}" &&
+	    optarg="${optarg#=}"
+    case "-$opt" in
+        -i|--input)
+            INPUT="$optarg"
+            ;;
+        -o|--outdir)
+            OUTDIR="$optarg"
+            ;;
+        -c|--cores)
+            CORES="$optarg"
+            ;;
+        -m|--memgb)
+            MEMGB="$optarg"
+            ;;
+        -h|--help)
+            showHelp
+            exit 0
+            ;;
+        -v|--version)
+            echo $VERSION
+            exit 0
+            ;;
+        \?)
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+# Perform Snakemake Workflow
+snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR --resources mem_gb=$MEMGB

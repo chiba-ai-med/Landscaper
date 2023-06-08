@@ -16,7 +16,7 @@
 .cache
 .fontconfig
 .snakemake
-data/*
+data/IsingGen
 output
 report
 logs

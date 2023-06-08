@@ -63,4 +63,4 @@ tibble(leaf = rep(seq_along(paths), times = lengths(paths)),
   mutate(leaf = if_else(str_detect(node_name, "basin"), node_name, NA_character_)) -> dg_skeleton
 
 # Save
-save(hc, dend, node_order, df_xy, paths, dg_skeleton, file=outfile)
+save(hc, dend, node_order, df_xy, subtrees, leaves, paths, dg_skeleton, file=outfile)
