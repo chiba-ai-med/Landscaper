@@ -42,6 +42,7 @@ Perform `Landscaper` by the `snakemake` command as follows.
 
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output \
+rownames="" colnames="" \
 --resources mem_gb=10 --use-singularity
 ```
 
@@ -51,6 +52,8 @@ The meanings of all the arguments are below.
 - `--config`: Snakemake option to set [the configuration](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) (mandatory)
 - `input`: Input file (e.g., data/testdata.tsv, mandatory)
 - `outdir`: Output directory (e.g., output, mandatory)
+- `rownames`: Row names of input matrix (e.g., data/rownames.tsv) (optional)
+- `colnames`: Column names of input matrix (e.g., data/colnames.tsv) (optional)
 - `--resources`: Snakemake option to control [resources](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources) (optional)
 - `mem_gb`: Memory usage (GB, e.g. 10, optional)
 - `--use-singularity`: Snakemake option to use Docker containers via [`Singularity`](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html) (mandatory)
@@ -60,7 +63,8 @@ The meanings of all the arguments are below.
 If the `GridEngine` (`qsub` command) is available in your environment, you can add the `qsub` command. Just adding the `--cluster` option, the jobs are submitted to multiple nodes and the computations are distributed.
 
 ```bash
-snakemake -j 32 --config input=data/testdata.tsv outdir=output \
+snakemake -j 4 --config input=data/testdata.tsv outdir=output \
+rownames="" colnames="" \
 --resources mem_gb=10 --use-singularity \
 --cluster "qsub -l nc=4 -p -50 -r yes" --latency-wait 60
 ```
@@ -70,7 +74,8 @@ snakemake -j 32 --config input=data/testdata.tsv outdir=output \
 Likewise, if the `Slurm` (`sbatch` command) is available in your environment, you can add the `sbatch` command after the `--cluster` option.
 
 ```bash
-snakemake -j 32 --config input=data/testdata.tsv outdir=output \
+snakemake -j 4 --config input=data/testdata.tsv outdir=output \
+rownames="" colnames="" \
 --resources mem_gb=10 --use-singularity \
 --cluster "sbatch -n 4 --nice=50 --requeue" --latency-wait 60
 ```

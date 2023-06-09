@@ -60,7 +60,8 @@ Next, perform `Landscaper` by the `snakemake` command as follows.
 
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output \
---resources mem_gb=10
+rownames="" colnames="" \
+--resources mem_gb=10 --use-singularity
 ```
 
 The meanings of all the arguments are below.
@@ -69,6 +70,8 @@ The meanings of all the arguments are below.
 - `--config`: Snakemake option to set [the configuration](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) (mandatory)
 - `input`: Input file (e.g., data/testdata.tsv, mandatory)
 - `outdir`: Output directory (e.g., output, mandatory)
+- `rownames`: Row names of input matrix (e.g., data/rownames.tsv) (optional)
+- `colnames`: Column names of input matrix (e.g., data/colnames.tsv) (optional)
 - `--resources`: Snakemake option to control [resources](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources) (optional)
 - `mem_gb`: Memory usage (GB, e.g. 10, optional)
 

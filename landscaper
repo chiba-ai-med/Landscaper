@@ -82,4 +82,4 @@ done
 shift $((OPTIND - 1))
 
 # Perform Snakemake Workflow
-snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR seed --resources rownames=$ROWNAMES colnames=$COLNAMES mem_gb=$MEMGB
+snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR rownames=$ROWNAMES colnames=$COLNAMES --resources mem_gb=$MEMGB
