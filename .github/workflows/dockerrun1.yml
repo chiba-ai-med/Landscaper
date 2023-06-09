@@ -14,10 +14,12 @@ jobs:
         steps:
             - name: checkout code
               uses: actions/checkout@v3
-            - name: docker run
+            - name: docker run (1/3)
               run: |
                   docker run --rm koki/landscaper_component:latest R -e "library('dcTensor'); library('IsingSampler'); library('igraph'); library('tagcloud'); library('tidyverse'); library('RColorBrewer'); library('akima'); library('spatstat'); library('magick'); library('cowplot'); library('dendextend'); library('Rcpp')"
+            - name: docker run (2/3)
               run: |
                   docker run --rm koki/landscaper_component:latest python3 -c "import snakemake; import sys; import numpy as np"
+            - name: docker run (3/3)
               run: |
                   docker run --rm koki/landscaper_component:latest snakemake -v
