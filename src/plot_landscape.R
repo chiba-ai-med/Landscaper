@@ -16,16 +16,15 @@ Coordinate <- as.matrix(read.table(infile4, header=FALSE))
 load(infile5)
 
 # Preprocess
-set.seed(123456)
 tmp <- interp(Coordinate[, 1], Coordinate[, 2], E, nx = 200, ny = 200)
 zlim <- tmp$z |> as.vector() |> na.omit() |> range()
 
 # Plot
 png(file=outfile, width=1000, height=1000)
 filled.contour(tmp, color.palette = colorRampPalette(topo.colors(11, alpha = 1)), xlim = c(-1, 1), ylim = c(-1, 1), zlim = zlim, asp = 1, nlevels = 24,
+	key.title = title(main="Energy"),
+	axes = FALSE,
 	plot.axes = {
-	axis(1)
-	axis(2)
 	contour(tmp$x, tmp$y, tmp$z, add = TRUE,
 		levels = seq(-10, 10, by=1), col = "gray75")
 	plot(g, layout=Coordinate,
@@ -33,6 +32,6 @@ filled.contour(tmp, color.palette = colorRampPalette(topo.colors(11, alpha = 1))
 		vertex.label.cex = 1.6,
 		vertex.size = 1.0,
 		vertex.color = factor(G_sub),
-		edge.arrow.size = 0.1, add = TRUE)
+		edge.arrow.size = 0.1, add = TRUE, axes=FALSE)
 	})
 dev.off()

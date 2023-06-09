@@ -4,7 +4,7 @@ This README is for M1/M2 Mac users.
 
 In our environment, `Singularity` did not work properly on M1/M2 Mac (2023/1/6).
 
-Therefore, for M1/M2 Mac user, the required tools for `TensorLyCV` are not available via the Docker container image file for now.
+Therefore, for M1/M2 Mac user, the required tools for `Landscaper` are not available via the Docker container image file for now.
 
 Instead, all required tools must be installed manually.
 
@@ -33,7 +33,7 @@ mamba --version
 Next, we created a `conda` environment containing the required tools in `Landscaper` as follows:
 
 ```bash
-mamba create -c conda-forge -c bioconda -c anaconda -n landscaper snakemake wget tensorly seaborn matplotlib -y
+mamba create -c conda-forge -c bioconda -c anaconda -n landscaper snakemake -y
 ```
 
 After activating the conda environment, we confirmed that the `snakemake` command did work as follows:
@@ -67,7 +67,7 @@ The meanings of all the arguments are below.
 
 - `-j`: Snakemake option to set [the number of cores](https://snakemake.readthedocs.io/en/stable/executing/cli.html#useful-command-line-arguments) (e.g. 10, mandatory)
 - `--config`: Snakemake option to set [the configuration](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) (mandatory)
-- `input`: Input file (e.g., vaccine_tensor.npy, mandatory)
+- `input`: Input file (e.g., data/testdata.tsv, mandatory)
 - `outdir`: Output directory (e.g., output, mandatory)
 - `--resources`: Snakemake option to control [resources](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources) (optional)
 - `mem_gb`: Memory usage (GB, e.g. 10, optional)

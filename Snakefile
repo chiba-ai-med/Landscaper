@@ -1,4 +1,5 @@
 from snakemake.utils import min_version
+import os
 
 #################################
 # Setting
@@ -11,15 +12,25 @@ INPUT = config["input"]
 OUTDIR = config["outdir"]
 
 # Optional Arguments
-# COLNAMES = config["colnames"]
-# ROWNAMES = config["rownames"]
-# TEMPERATURE = config["temp"]
+SEED = config["seed"]
+
+ROWNAMES = config["rownames"]
+if ROWNAMES != None:
+	is_file = os.path.isfile(ROWNAMES)
+	if not(is_file):
+		raise FileNotFoundError("Please check the file for rownames exists")
+
+COLNAMES = config["colnames"]
+if COLNAMES != None:
+	is_file = os.path.isfile(COLNAMES)
+	if not(is_file):
+		raise FileNotFoundError("Please check the file for colnames exists")
+
 # COORDINATE = config["coordinate"]
-# TEXT, Seurat, Loom, 10X
-# TYPE = config[""]
+# TYPE = config["type"] # TEXT, Seurat, Loom, 10X
 
 # Docker Container
-container: 'docker://koki/landscaper_component:20230608'
+container: 'docker://koki/landscaper_component:20230609'
 
 # All Rules
 rule all:
@@ -110,7 +121,7 @@ rule plot_parameters:
 	log:
 		OUTDIR + '/logs/plot_parameters.log'
 	shell:
-		'src/plot_parameters.sh {input} {output} >& {log}'
+		'src/plot_parameters.sh {input} {output} {COLNAMES} >& {log}'
 
 #############################################################
 # Status Network
@@ -130,7 +141,7 @@ rule status_network:
 	log:
 		OUTDIR + '/logs/status_network.log'
 	shell:
-		'src/status_network.sh {input} {output} >& {log}'
+		'src/status_network.sh {input} {output} {SEED} >& {log}'
 
 rule plot_basin:
 	input:
@@ -143,7 +154,7 @@ rule plot_basin:
 	log:
 		OUTDIR + '/logs/plot_basin.log'
 	shell:
-		'src/plot_basin.sh {input} {output} >& {log}'
+		'src/plot_basin.sh {input} {output} {COLNAMES} >& {log}'
 
 rule plot_status_network:
 	input:

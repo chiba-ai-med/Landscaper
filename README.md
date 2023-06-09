@@ -1,6 +1,6 @@
 # Landscaper
 
-[![Snakemake](https://img.shields.io/badge/snakemake-≥6.0.5-brightgreen.svg)](https://snakemake.github.io)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥7.24.0-brightgreen.svg)](https://snakemake.github.io)
 [![DOI](https://zenodo.org/badge/634765201.svg)](https://zenodo.org/badge/latestdoi/634765201)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/build_test_push.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/dockerrun1.yml/badge.svg)
@@ -9,7 +9,7 @@
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/landscaper.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/release-please.yml/badge.svg)
 
-`Snakemake` workflow to perform Landscape Analysis
+`Snakemake` workflow to perform Energy Landscape Analysis
 
 `Landscaper` consists of the rules below:
 
@@ -34,20 +34,11 @@ For the details, see the installation documents below.
 
 # Usage
 
-In this demo, we use the data from [Ikeda K. et al., iScience, 2022](https://www.sciencedirect.com/science/article/pii/S2589004222015097) (questionnaire on adverse reactions to COVID-19 vaccine) but a user can specify any user's higher-order array or tensor.
-
-## Download this GitHub repository
-
-First, download this GitHub repository and change the working directory.
-
-```bash
-git clone https://github.com/kokitsuyuzaki/Landscaper.git
-cd Landscaper
-```
+In this demo, we use a toy data from [ELAT](https://github.com/tkEzaki/energy-landscape-analysis) (`data/testdata.tsv`) but user can specify any user's data.
 
 ## Example with local machine
 
-Next, perform `Landscaper` by the `snakemake` command as follows.
+Perform `Landscaper` by the `snakemake` command as follows.
 
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output \
@@ -58,7 +49,7 @@ The meanings of all the arguments are below.
 
 - `-j`: Snakemake option to set [the number of cores](https://snakemake.readthedocs.io/en/stable/executing/cli.html#useful-command-line-arguments) (e.g. 10, mandatory)
 - `--config`: Snakemake option to set [the configuration](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) (mandatory)
-- `input`: Input file (e.g., vaccine_tensor.npy, mandatory)
+- `input`: Input file (e.g., data/testdata.tsv, mandatory)
 - `outdir`: Output directory (e.g., output, mandatory)
 - `--resources`: Snakemake option to control [resources](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources) (optional)
 - `mem_gb`: Memory usage (GB, e.g. 10, optional)
@@ -96,7 +87,6 @@ docker run --rm -v $(pwd):/work ghcr.io/chiba-ai-med/landscaper:main \
 
 # Reference
 - [ELAT](https://github.com/tkEzaki/energy-landscape-analysis)
-- [ConIII](https://github.com/eltrompetero/coniii)
 
 # Authors
 - Koki Tsuyuzaki

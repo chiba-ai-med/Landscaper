@@ -10,6 +10,8 @@ library("magick")
 library("cowplot")
 library("dendextend")
 library("Rcpp")
+library("viridis")
+library("GGally")
 
 #################################################
 # Disconnectivity graph

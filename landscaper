@@ -3,14 +3,20 @@
 # Help page
 showHelp() {
     cat << EOF
-Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--memgb/-h/-v]
+Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--seed/--rownames/--colnames/--memgb/-h/-v]
 Landscaper: Snakemake workflow to perform Energy Landscape Analysis
 
-    -i, -input,         --input                 Input file (e.g., data/vaccine_tensor.npy, mandatory)
+    -i, -input,         --input                 Input file (e.g., data/testdata.tsv, mandatory)
 
     -o, -outdir,        --outdir                Output directory (e.g., output, mandatory)
 
     -c, -cores,         --cores                 Number of cores to use Snakemake (e.g., default value is 10, optional)
+
+    -s, -seed,          --seed                  Random seed used when visualize status network
+
+    -r, -rownames,      --rownames              Row/sample names for data matrix
+
+    -l, -colnames,      --colnames              Column/variable names for data matrix
 
     -m, -memgb,         --memgb                 Memory usage (GB, e.g., default value is 10, optional)
 
@@ -25,11 +31,14 @@ EOF
 INPUT=""
 OUTDIR=""
 CORES=10
+SEED=123456
+ROWNAMES=""
+COLNAMES=""
 MEMGB=10
 VERSION="v1.1.0"
 
 # Command Argument Parsing
-while getopts i:o:c:m:h-:v- opt; do
+while getopts i:o:c:s:r:l:m:h-:v- opt; do
 	optarg="$OPTARG"
 	[[ "$opt" = - ]] &&
 	    opt="-${OPTARG%%=*}" &&
@@ -44,6 +53,15 @@ while getopts i:o:c:m:h-:v- opt; do
             ;;
         -c|--cores)
             CORES="$optarg"
+            ;;
+        -s|--seed)
+            SEED="$optarg"
+            ;;
+        -r|--rownames)
+            ROWNAMES="$optarg"
+            ;;
+        -l|--colnames)
+            COLNAMES="$optarg"
             ;;
         -m|--memgb)
             MEMGB="$optarg"
@@ -64,4 +82,4 @@ done
 shift $((OPTIND - 1))
 
 # Perform Snakemake Workflow
-snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR --resources mem_gb=$MEMGB
+snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR seed --resources rownames=$ROWNAMES colnames=$COLNAMES mem_gb=$MEMGB

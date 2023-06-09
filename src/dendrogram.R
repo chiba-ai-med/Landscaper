@@ -42,6 +42,11 @@ get_nodes_xy(dend) %>%
             by = c("node_name" = "stateID")) %>%
   mutate(y = if_else(is.na(E), y, E)) -> df_xy
 
+# Convert leaf_no to state number.
+tibble(state = Basin) |>
+  arrange(state) |>
+  mutate(leaf_no = row_number()) |>
+  mutate(leaf_no = as.character(leaf_no)) -> leaf2state
 
 # assume top node is used by all subtrees
 partition_leaves(dend) -> subtrees
@@ -56,11 +61,12 @@ tibble(leaf = rep(seq_along(paths), times = lengths(paths)),
     unique() %>%
   left_join(df_xy %>% select(x, y, node, node_name),
             by = c("to" = "node")) %>%
-  rename(xend = x,
-         yend = y) %>%
+  rename(xend = x, yend = y) %>%
   left_join(df_xy %>% select(x, y, node),
             by = c("from" = "node")) %>%
-  mutate(leaf = if_else(str_detect(node_name, "basin"), node_name, NA_character_)) -> dg_skeleton
+  mutate(leaf = if_else(str_detect(node_name, "basin"), node_name, NA_character_)) %>%
+  mutate(leaf_no = str_split_i(leaf, "_", 2)) %>%
+  left_join(leaf2state, by = "leaf_no") -> dg_skeleton
 
 # Save
 save(hc, dend, node_order, df_xy, subtrees, leaves, paths, dg_skeleton, file=outfile)

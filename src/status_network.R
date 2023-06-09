@@ -8,6 +8,7 @@ outfile2 <- args[4]
 outfile3 <- args[5]
 outfile4 <- args[6]
 outfile5 <- args[7]
+seed <- args[8]
 
 # Load
 Allstates <- as.matrix(read.table(infile1, header=FALSE))
@@ -39,8 +40,8 @@ Basin <- sapply(unique(G_sub), function(x){
 
 # 2D Coordinate
 lay_init <- layout_with_kk(g) # Kamada-Kawai layout
-set.seed(123456)
-lay <- layout_with_fr(g, coords = lay_init,  niter = 1000,
+set.seed(seed)
+lay <- layout_with_fr(g, coords = lay_init, niter = 1000,
                       grid = "nogrid") # FR layout with KK-initialization
 Coordinate <- layout.norm(lay, -1, 1, -1, 1) # normalization
 

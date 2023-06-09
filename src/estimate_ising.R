@@ -39,8 +39,7 @@ J <- res$graph
 E <- apply(Allstates, 1, function(s){IsingSampler:::H(J,s,h)})
 
 # Estimated Probability
-beta = 1
-P_est <- exp(-beta * E) / sum(exp(-beta * E))
+P_est <- exp(- E) / sum(exp(- E))
 
 # Save
 write.table(Allstates, outfile1, quote=FALSE, row.names=FALSE, col.names=FALSE)

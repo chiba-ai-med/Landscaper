@@ -10,10 +10,9 @@ load(infile)
 
 # Plot a disconnectivity graph with the pele or PyConnect style.
 dg_skeleton %>%
-  mutate(leaf_no = str_split_i(leaf, "_", 2)) %>%
   ggplot() +
   geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_text(aes(x = xend, y = yend - 0.05, label = leaf_no)) +
+  geom_text(aes(x = xend, y = yend - 0.05, label = state)) +
   theme_bw() +
   theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
@@ -22,11 +21,10 @@ dg_skeleton %>%
 
 # Plot a disconnectivity graph with the 90 degree bending connection style.
 dg_skeleton %>%
-  mutate(leaf_no = str_split_i(leaf, "_", 2)) %>%
   ggplot() +
   geom_segment(aes(x = x, y = y, xend = xend, yend = y)) +
   geom_segment(aes(x = xend, y = y, xend = xend, yend = yend)) +
-  geom_text(aes(x = xend, y = yend - 0.05, label = leaf_no)) +
+  geom_text(aes(x = xend, y = yend - 0.05, label = state)) +
   theme_bw() +
   theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
