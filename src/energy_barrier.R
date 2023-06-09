@@ -36,11 +36,13 @@ expand.grid(from = 1:2^nparam, to = 1:2^nparam) |>
 Basin_0 <- Basin - 1
 n_Basin <- length(Basin_0)
 EnergyBarrier <- matrix(nrow = n_Basin, ncol = n_Basin)
-for(i in 1:(n_Basin - 1)){
-  tmp <- widest_paths(adjacent_graph, Basin_0[i])
-  for(j in (i + 1):n_Basin){
-    EnergyBarrier[i, j] <- E_max - tmp[Basin_0[j] + 1][[1]]$weight
-    EnergyBarrier[j, i] <- EnergyBarrier[i, j]
+if(n_Basin != 1){
+  for(i in 1:(n_Basin - 1)){
+    tmp <- widest_paths(adjacent_graph, Basin_0[i])
+    for(j in (i + 1):n_Basin){
+      EnergyBarrier[i, j] <- E_max - tmp[Basin_0[j] + 1][[1]]$weight
+      EnergyBarrier[j, i] <- EnergyBarrier[i, j]
+    }
   }
 }
 

@@ -18,9 +18,14 @@ if(varnames_file != "None"){
 # Basin (e.g., 4*7)
 colnames_Allstates <- colnames(Allstates)
 Allstates[] <- as.character(Allstates)
-Allstates <- data.frame(id=factor(Basin, levels=Basin), Allstates[Basin, ])
+if(length(Basin) == 1){
+	Allstates <- data.frame(id=factor(Basin, levels=Basin), t(Allstates[Basin, ]))
+}else{
+	Allstates <- data.frame(id=factor(Basin, levels=Basin), Allstates[Basin, ])
+}
 colnames(Allstates)[2:ncol(Allstates)] <- colnames_Allstates
 data <- pivot_longer(Allstates, !id)
+data$name <- factor(data$name, levels=unique(data$name))
 g <- ggplot(data, aes(x=id, y=name, fill=value))
 g <- g + geom_tile()
 g <- g + labs(x="Basins/Local mimima", y="Variable")

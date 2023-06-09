@@ -20,18 +20,36 @@ tmp <- interp(Coordinate[, 1], Coordinate[, 2], E, nx = 200, ny = 200)
 zlim <- tmp$z |> as.vector() |> na.omit() |> range()
 
 # Plot
-png(file=outfile, width=1000, height=1000)
-filled.contour(tmp, color.palette = colorRampPalette(topo.colors(11, alpha = 1)), xlim = c(-1, 1), ylim = c(-1, 1), zlim = zlim, asp = 1, nlevels = 24,
-	key.title = title(main="Energy"),
-	axes = FALSE,
-	plot.axes = {
-	contour(tmp$x, tmp$y, tmp$z, add = TRUE,
-		levels = seq(-10, 10, by=1), col = "gray75")
-	plot(g, layout=Coordinate,
-		vertex.label.color = "black",
-		vertex.label.cex = 1.6,
-		vertex.size = 1.0,
-		vertex.color = factor(G_sub),
-		edge.arrow.size = 0.1, add = TRUE, axes=FALSE)
-	})
-dev.off()
+if(length(E) < 1024){
+	png(file=outfile, width=1000, height=1000)
+	filled.contour(tmp, color.palette = colorRampPalette(topo.colors(11, alpha = 1)), xlim = c(-1, 1), ylim = c(-1, 1), zlim = zlim, asp = 1, nlevels = 24,
+		key.title = title(main="Energy"),
+		axes = FALSE,
+		plot.axes = {
+		contour(tmp$x, tmp$y, tmp$z, add = TRUE,
+			levels = seq(-10, 10, by=1), col = "gray75")
+		plot(g, layout=Coordinate,
+			vertex.label.color = "black",
+			vertex.label.cex = 1.6,
+			vertex.size = 1.0,
+			vertex.color = factor(G_sub),
+			edge.arrow.size = 0.1, add = TRUE, axes=FALSE)
+		})
+	dev.off()
+}else{
+	png(file=outfile, width=1800, height=1800)
+	filled.contour(tmp, color.palette = colorRampPalette(topo.colors(11, alpha = 1)), xlim = c(-1, 1), ylim = c(-1, 1), zlim = zlim, asp = 1, nlevels = 24,
+		key.title = title(main="Energy"),
+		axes = FALSE,
+		plot.axes = {
+		contour(tmp$x, tmp$y, tmp$z, add = TRUE,
+			levels = seq(-10, 10, by=1), col = "gray75")
+		plot(g, layout=Coordinate,
+			vertex.label.color = "black",
+			vertex.label.cex = 1.5,
+			vertex.size = 1.0,
+			vertex.color = factor(G_sub),
+			edge.arrow.size = 0.1, add = TRUE, axes=FALSE)
+		})
+	dev.off()
+}

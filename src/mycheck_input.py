@@ -29,7 +29,11 @@ else:
     np.savetxt(outfile2, [0], fmt="%d")
 
 # Data size Check
-if mat.shape[1] > 10:
-    np.savetxt(outfile3, [1], fmt="%d")
+if len(mat.shape) == 1:
+    print("There is only one variable.")
+    quit()
 else:
-    np.savetxt(outfile3, [0], fmt="%d")
+    if mat.shape[1] > 10:
+        np.savetxt(outfile3, [1], fmt="%d")
+    else:
+        np.savetxt(outfile3, [0], fmt="%d")

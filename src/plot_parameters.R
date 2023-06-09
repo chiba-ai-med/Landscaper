@@ -38,6 +38,7 @@ Allstates[] <- as.character(Allstates)
 Allstates <- data.frame(id=seq_len(nrow(Allstates)), Allstates)
 colnames(Allstates)[2:ncol(Allstates)] <- colnames_Allstates
 data1 <- pivot_longer(Allstates, !id)
+data1$name <- factor(data1$name, levels=unique(data1$name))
 g1 <- ggplot(data1, aes(x=id, y=name, fill=value))
 g1 <- g1 + geom_tile()
 g1 <- g1 + labs(x="All States", y="Variable")
