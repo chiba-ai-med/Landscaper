@@ -8,12 +8,16 @@ on:
   workflow_dispatch:
 
 jobs:
-    unit-test-job:
-        name: run unit-test job
+    check-component-job:
+        name: run R and Python job
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
               uses: actions/checkout@v3
             - name: docker run
-              run: |
-                  docker run --rm -v $(pwd):/work koki/landscaper_component:latest R -e "library('dcTensor'); library('IsingSampler'); library('igraph'); library('tagcloud'); library('tidyverse'); library('RColorBrewer'); library('akima'); library('spatstat'); library('magick'); library('cowplot'); library('dendextend'); library('Rcpp')" && python3 -c "import snakemake; import sys; import numpy as np" && snakemake -v
+              - run: |
+                  docker run --rm koki/landscaper_component:latest R -e "library('dcTensor'); library('IsingSampler'); library('igraph'); library('tagcloud'); library('tidyverse'); library('RColorBrewer'); library('akima'); library('spatstat'); library('magick'); library('cowplot'); library('dendextend'); library('Rcpp')"
+              - run: |
+                  docker run --rm koki/landscaper_component:latest python3 -c "import snakemake; import sys; import numpy as np"
+              - run: |
+                  docker run --rm koki/landscaper_component:latest snakemake -v

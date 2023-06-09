@@ -8,12 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-    unit-test-job:
-        name: run unit-test job
+    dockerhub-pull-job:
+        name: run docker pull from DockerHub job
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
               uses: actions/checkout@v3
-            - name: docker run
+            - name: docker pull
               run: |
                   docker pull koki/landscaper:main

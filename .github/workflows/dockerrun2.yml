@@ -8,12 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-    unit-test-job:
-        name: run unit-test job
+    ghcr-pull-job:
+        name: run docker pull from ghcr.io job
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
               uses: actions/checkout@v3
-            - name: docker run
+            - name: docker pull
               run: |
                   echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u kokitsuyuzaki --password-stdin && docker pull ghcr.io/chiba-ai-med/landscaper:main
