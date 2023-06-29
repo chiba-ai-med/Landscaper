@@ -1,6 +1,15 @@
+# Expect Error
+function catch {
+  echo Catch
+}
+trap catch ERR
+
 # Perform landscaper
 docker run --rm -v $(pwd):/work ghcr.io/chiba-ai-med/landscaper:main \
--i /work/data/testdata_continuous.tsv -o /work/output_cont --memgb=10
+-i /work/data/testdata_13.tsv -o /work/output_13 --memgb=10
 
-# Test Outputs
-docker run --rm -v $(pwd):/work koki/landscaper_component:latest Rscript /work/src/test_cont.R output_cont
+# Error when no error
+if [ $? = 0 ]; then
+	echo "No error"
+	exit 1
+fi
