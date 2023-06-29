@@ -30,7 +30,7 @@ if COLNAMES != None:
 # TYPE = config["type"] # TEXT, Seurat, Loom, 10X
 
 # Docker Container
-container: 'docker://koki/landscaper_component:20230609'
+container: 'docker://koki/landscaper_component:20230627'
 
 # All Rules
 rule all:
@@ -53,9 +53,9 @@ rule check_input:
 	input:
 		INPUT
 	output:
-		OUTDIR + '/FLOAT_DATA.tsv',
+		OUTDIR + '/CHECK_LARGE_DATA',
 		OUTDIR + '/CHECK_BINARY',
-		OUTDIR + '/CHECK_LARGE_DATA'
+		OUTDIR + '/CHECK_ONE_minusONE'
 	benchmark:
 		OUTDIR + '/benchmarks/check_input.txt'
 	log:
@@ -68,9 +68,10 @@ rule check_input:
 #############################################################
 rule binarization:
 	input:
-		OUTDIR + '/FLOAT_DATA.tsv',
+		INPUT,
+		OUTDIR + '/CHECK_LARGE_DATA',
 		OUTDIR + '/CHECK_BINARY',
-		OUTDIR + '/CHECK_LARGE_DATA'
+		OUTDIR + '/CHECK_ONE_minusONE'
 	output:
 		OUTDIR + '/BIN_DATA.tsv'
 	benchmark:

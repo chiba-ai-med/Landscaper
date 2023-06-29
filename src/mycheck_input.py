@@ -19,8 +19,15 @@ if np.unique(mat).shape[0] == 1:
     print("The data tensor is empty...")
     quit()
 
-# Saving a Numpy array into a Numpy's Binary file
-np.savetxt(outfile1, mat, fmt="%d")
+# Data size Check
+if len(mat.shape) == 1:
+    print("There is only one variable.")
+    quit()
+else:
+    if mat.shape[1] > 13:
+        np.savetxt(outfile1, [1], fmt="%d")
+    else:
+        np.savetxt(outfile1, [0], fmt="%d")
 
 # Binary Check
 if np.unique(mat).shape[0] == 2:
@@ -28,12 +35,8 @@ if np.unique(mat).shape[0] == 2:
 else:
     np.savetxt(outfile2, [0], fmt="%d")
 
-# Data size Check
-if len(mat.shape) == 1:
-    print("There is only one variable.")
-    quit()
+# Binary Check
+if set(np.unique(mat)) == {1.0,-1.0}:
+    np.savetxt(outfile3, [1], fmt="%d")
 else:
-    if mat.shape[1] > 10:
-        np.savetxt(outfile3, [1], fmt="%d")
-    else:
-        np.savetxt(outfile3, [0], fmt="%d")
+    np.savetxt(outfile3, [0], fmt="%d")

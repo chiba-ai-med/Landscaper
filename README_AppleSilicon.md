@@ -61,7 +61,7 @@ Next, perform `Landscaper` by the `snakemake` command as follows.
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output \
 seed=123456 rownames="" colnames="" \
---resources mem_gb=10 --use-singularity
+--resources mem_gb=10
 ```
 
 The meanings of all the arguments are below.
