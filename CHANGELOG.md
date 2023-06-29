@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.1.0...v1.1.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* .gitignore ([7d2499b](https://github.com/chiba-ai-med/Landscaper/commit/7d2499b2b793e41e7d6a76aeba8e6659ae115491))
+* rm median/smbf-based binarization ([3baab52](https://github.com/chiba-ai-med/Landscaper/commit/3baab5214ec4315334370d3811205f0e2bde72f9))
+
 ## [1.1.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.0.0...v1.1.0) (2023-06-09)
 
 
