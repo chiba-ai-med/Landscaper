@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/chiba-ai-med/Landscaper/compare/v1.1.1...v1.1.2) (2023-07-12)
+
+
+### Bug Fixes
+
+* src/dendrogram.R ([a31f01c](https://github.com/chiba-ai-med/Landscaper/commit/a31f01c753f3bc94c7d5350aaefb2e562f9f60ca))
+
 ## [1.1.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.1.0...v1.1.1) (2023-06-29)
 
 
