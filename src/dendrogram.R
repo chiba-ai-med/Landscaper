@@ -46,7 +46,7 @@ if(length(Basin) == 1){
       ungroup() %>%
       left_join(state_energy |>
                   filter(state %in% (Basin - 1)) %>%
-                  mutate(stateID = row_number(),
+                  mutate(stateID = match(state, Basin - 1),
                          stateID = paste0("basin_", stateID)) %>%
                   select(!state),
                 by = c("node_name" = "stateID")) %>%
@@ -54,7 +54,6 @@ if(length(Basin) == 1){
 
     # Convert leaf_no to state number.
     tibble(state = Basin) |>
-      arrange(state) |>
       mutate(leaf_no = row_number()) |>
       mutate(leaf_no = as.character(leaf_no)) -> leaf2state
 
