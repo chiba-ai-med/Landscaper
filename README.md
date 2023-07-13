@@ -10,6 +10,7 @@
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/unittest2.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/unittest3.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/Landscaper/actions/workflows/release-please.yml/badge.svg)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchiba-ai-med%2FLandscaper.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchiba-ai-med%2FLandscaper?ref=badge_shield)
 
 `Snakemake` workflow to perform Energy Landscape Analysis
 
