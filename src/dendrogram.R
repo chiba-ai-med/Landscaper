@@ -4,12 +4,18 @@ args <- commandArgs(trailingOnly = TRUE)
 infile1 <- args[1]
 infile2 <- args[2]
 infile3 <- args[3]
-outfile <- args[4]
+infile4 <- args[4]
+outfile <- args[5]
 
 # Loading
 E <- unlist(read.table(infile1, header=FALSE))
 Basin <- unlist(read.table(infile2, header=FALSE))
 EnergyBarrier <- as.matrix(read.table(infile3, header=FALSE))
+if(file.size(infile4) != 0){
+    Group <- read.table(infile4, header=FALSE)
+}else{
+    Group <- NULL
+}
 
 if(length(Basin) == 1){
     hc <- NULL
@@ -56,6 +62,9 @@ if(length(Basin) == 1){
     tibble(state = Basin) |>
       mutate(leaf_no = row_number()) |>
       mutate(leaf_no = as.character(leaf_no)) -> leaf2state
+    if(!is.null(Group)){
+        leaf2state$state <- Group[leaf2state$state, 9]
+    }
 
     # assume top node is used by all subtrees
     partition_leaves(dend) -> subtrees
@@ -70,7 +79,7 @@ if(length(Basin) == 1){
         unique() %>%
       left_join(df_xy %>% select(x, y, node, node_name),
                 by = c("to" = "node")) %>%
-      rename(xend = x, yend = y) %>%
+      dplyr::rename(xend = x, yend = y) %>%
       left_join(df_xy %>% select(x, y, node),
                 by = c("from" = "node")) %>%
       mutate(leaf = if_else(str_detect(node_name, "basin"), node_name, NA_character_)) %>%

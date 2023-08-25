@@ -3,16 +3,22 @@ source("src/Functions.R")
 args <- commandArgs(trailingOnly = TRUE)
 infile1 <- args[1]
 infile2 <- args[2]
-outfile1 <- args[3]
-outfile2 <- args[4]
-outfile3 <- args[5]
-outfile4 <- args[6]
-outfile5 <- args[7]
-seed <- args[8]
+infile3 <- args[3]
+outfile1 <- args[4]
+outfile2 <- args[5]
+outfile3 <- args[6]
+outfile4 <- args[7]
+outfile5 <- args[8]
+seed <- args[9]
 
 # Load
 Allstates <- as.matrix(read.table(infile1, header=FALSE))
 E <- unlist(read.table(infile2, header=FALSE))
+if(file.size(infile3) != 0){
+	Group <- read.table(infile3, header=FALSE)
+}else{
+	Group <- NULL
+}
 
 # Neighborhood Graph
 G_ngh <- Allstates %*% t(Allstates)
@@ -30,6 +36,10 @@ A <- t(apply(G_ngh * E, 2, function(x){
 	out[position] <- 1
 	out
 	}))
+if(!is.null(Group)){
+	rownames(A) <- Group[, 9]
+	colnames(A) <- Group[, 9]
+}
 
 # Sub Graph Label
 g <- graph_from_adjacency_matrix(A)

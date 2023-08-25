@@ -26,9 +26,9 @@ expand.grid(from = 1:2^nparam, to = 1:2^nparam) |>
          to = to - 1) |>
   select(from, to) |>
   left_join(state_energy, by = c("from" = "state")) |>
-  rename(E_from = E) |>
+  dplyr::rename(E_from = E) |>
   left_join(state_energy, by = c("to" = "state")) |>
-  rename(E_to = E) |>
+  dplyr::rename(E_to = E) |>
   mutate(weight = E_max - max(E_from, E_to)) |>
   select(from, to, weight) -> adjacent_graph
 

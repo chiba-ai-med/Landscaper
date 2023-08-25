@@ -3,7 +3,7 @@
 # Help page
 showHelp() {
     cat << EOF
-Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--seed/--rownames/--colnames/--memgb/-h/-v]
+Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--seed/--group/--colnames/--memgb/-h/-v]
 Landscaper: Snakemake workflow to perform Energy Landscape Analysis
 
     -i, -input,         --input                 Input file (e.g., data/testdata.tsv, mandatory)
@@ -14,7 +14,7 @@ Landscaper: Snakemake workflow to perform Energy Landscape Analysis
 
     -s, -seed,          --seed                  Random seed used when visualize status network
 
-    -r, -rownames,      --rownames              Row/sample names for data matrix
+    -g, -group,      --group                    Group of input matrix
 
     -l, -colnames,      --colnames              Column/variable names for data matrix
 
@@ -32,13 +32,13 @@ INPUT=""
 OUTDIR=""
 CORES=10
 SEED=123456
-ROWNAMES=""
+GROUP=""
 COLNAMES=""
 MEMGB=10
 VERSION="v1.1.0"
 
 # Command Argument Parsing
-while getopts i:o:c:s:r:l:m:h-:v- opt; do
+while getopts i:o:c:s:g:l:m:h-:v- opt; do
 	optarg="$OPTARG"
 	[[ "$opt" = - ]] &&
 	    opt="-${OPTARG%%=*}" &&
@@ -57,8 +57,8 @@ while getopts i:o:c:s:r:l:m:h-:v- opt; do
         -s|--seed)
             SEED="$optarg"
             ;;
-        -r|--rownames)
-            ROWNAMES="$optarg"
+        -g|--group)
+            GROUP="$optarg"
             ;;
         -l|--colnames)
             COLNAMES="$optarg"
@@ -82,4 +82,4 @@ done
 shift $((OPTIND - 1))
 
 # Perform Snakemake Workflow
-snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR seed=$SEED rownames=$ROWNAMES colnames=$COLNAMES --resources mem_gb=$MEMGB
+snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR seed=$SEED group=$GROUP colnames=$COLNAMES --resources mem_gb=$MEMGB

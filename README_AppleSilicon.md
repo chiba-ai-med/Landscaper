@@ -60,7 +60,7 @@ Next, perform `Landscaper` by the `snakemake` command as follows.
 
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output \
-seed=123456 rownames="" colnames="" \
+seed=123456 group="" colnames="" \
 --resources mem_gb=10
 ```
 
@@ -71,7 +71,7 @@ The meanings of all the arguments are below.
 - `input`: Input file (e.g., data/testdata.tsv, mandatory)
 - `outdir`: Output directory (e.g., output, mandatory)
 - `seed`: Random seed used when visualize status network (e.g., 123456) (optional)
-- `rownames`: Row names of input matrix (e.g., data/rownames.tsv) (optional)
+- `group`: Group of input matrix (e.g., data/group.tsv) (optional)
 - `colnames`: Column names of input matrix (e.g., data/colnames.tsv) (optional)
 - `--resources`: Snakemake option to control [resources](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources) (optional)
 - `mem_gb`: Memory usage (GB, e.g. 10, optional)

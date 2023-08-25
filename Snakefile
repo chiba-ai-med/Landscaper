@@ -14,11 +14,11 @@ OUTDIR = config["outdir"]
 # Optional Arguments
 SEED = config["seed"]
 
-ROWNAMES = config["rownames"]
-if ROWNAMES != None:
-	is_file = os.path.isfile(ROWNAMES)
+GROUP = config["group"]
+if GROUP != None:
+	is_file = os.path.isfile(GROUP)
 	if not(is_file):
-		raise FileNotFoundError("Please check the file for rownames exists")
+		raise FileNotFoundError("Please check the file for group exists")
 
 COLNAMES = config["colnames"]
 if COLNAMES != None:
@@ -30,18 +30,27 @@ if COLNAMES != None:
 # TYPE = config["type"] # TEXT, Seurat, Loom, 10X
 
 # Docker Container
-container: 'docker://koki/landscaper_component:20230627'
+container: 'docker://koki/landscaper_component:20230815'
 
 # All Rules
 rule all:
 	input:
+		OUTDIR + '/major_group.tsv',
+		OUTDIR + '/Allstates_major_group.tsv',
+		OUTDIR + '/plot/ratio_group.png',
 		OUTDIR + '/plot/Allstates.png',
 		OUTDIR + '/plot/Freq_Prob_Energy.png',
 		OUTDIR + '/plot/h.png',
 		OUTDIR + '/plot/J.png',
 		OUTDIR + '/plot/Basin.png',
 		OUTDIR + '/plot/StatusNetwork_Subgraph.png',
+		OUTDIR + '/plot/StatusNetwork_Subgraph_legend.png',
 		OUTDIR + '/plot/StatusNetwork_Energy.png',
+		OUTDIR + '/plot/StatusNetwork_Energy_legend.png',
+		OUTDIR + '/plot/StatusNetwork_Ratio.png',
+		OUTDIR + '/plot/StatusNetwork_Ratio_legend.png',
+		OUTDIR + '/plot/StatusNetwork_State.png',
+		OUTDIR + '/plot/StatusNetwork_State_legend.png',
 		OUTDIR + '/plot/Landscape.png',
 		OUTDIR + '/plot/discon_graph_1.png',
 		OUTDIR + '/plot/discon_graph_2.png'
@@ -125,12 +134,55 @@ rule plot_parameters:
 		'src/plot_parameters.sh {input} {output} {COLNAMES} >& {log}'
 
 #############################################################
+# Group Information
+#############################################################
+rule ratio_group:
+	input:
+		OUTDIR + '/Allstates.tsv',
+		OUTDIR + '/BIN_DATA.tsv'
+	output:
+		OUTDIR + '/ratio_group.tsv'
+	benchmark:
+		OUTDIR + '/benchmarks/ratio_group.txt'
+	log:
+		OUTDIR + '/logs/ratio_group.log'
+	shell:
+		'src/ratio_group.sh {input} {output} {GROUP} >& {log}'
+
+rule major_group:
+	input:
+		OUTDIR + '/Allstates.tsv',
+		OUTDIR + '/ratio_group.tsv'
+	output:
+		OUTDIR + '/major_group.tsv',
+		OUTDIR + '/Allstates_major_group.tsv'
+	benchmark:
+		OUTDIR + '/benchmarks/major_group.txt'
+	log:
+		OUTDIR + '/logs/major_group.log'
+	shell:
+		'src/major_group.sh {input} {output} >& {log}'
+
+rule plot_ratio_group:
+	input:
+		OUTDIR + '/ratio_group.tsv'
+	output:
+		OUTDIR + '/plot/ratio_group.png'
+	benchmark:
+		OUTDIR + '/benchmarks/plot_ratio_group.txt'
+	log:
+		OUTDIR + '/logs/plot_ratio_group.log'
+	shell:
+		'src/plot_ratio_group.sh {input} {output} >& {log}'
+
+#############################################################
 # Status Network
 #############################################################
 rule status_network:
 	input:
 		OUTDIR + '/Allstates.tsv',
-		OUTDIR + '/E.tsv'
+		OUTDIR + '/E.tsv',
+		OUTDIR + '/Allstates_major_group.tsv'
 	output:
 		OUTDIR + '/StatusNetwork.tsv',
 		OUTDIR + '/SubGraph.tsv',
@@ -147,7 +199,8 @@ rule status_network:
 rule plot_basin:
 	input:
 		OUTDIR + '/Allstates.tsv',
-		OUTDIR + '/Basin.tsv'
+		OUTDIR + '/Basin.tsv',
+		OUTDIR + '/Allstates_major_group.tsv'
 	output:
 		OUTDIR + '/plot/Basin.png'
 	benchmark:
@@ -163,10 +216,18 @@ rule plot_status_network:
 		OUTDIR + '/SubGraph.tsv',
 		OUTDIR + '/Basin.tsv',
 		OUTDIR + '/Coordinate.tsv',
-		OUTDIR + '/igraph.RData'
+		OUTDIR + '/igraph.RData',
+		OUTDIR + '/ratio_group.tsv',
+		OUTDIR + '/Allstates_major_group.tsv'
 	output:
 		OUTDIR + '/plot/StatusNetwork_Subgraph.png',
-		OUTDIR + '/plot/StatusNetwork_Energy.png'
+		OUTDIR + '/plot/StatusNetwork_Subgraph_legend.png',
+		OUTDIR + '/plot/StatusNetwork_Energy.png',
+		OUTDIR + '/plot/StatusNetwork_Energy_legend.png',
+		OUTDIR + '/plot/StatusNetwork_Ratio.png',
+		OUTDIR + '/plot/StatusNetwork_Ratio_legend.png',
+		OUTDIR + '/plot/StatusNetwork_State.png',
+		OUTDIR + '/plot/StatusNetwork_State_legend.png'
 	benchmark:
 		OUTDIR + '/benchmarks/plot_status_network.txt'
 	log:
@@ -214,7 +275,8 @@ rule dendrogram:
 	input:
 		OUTDIR + '/E.tsv',
 		OUTDIR + '/Basin.tsv',
-		OUTDIR + '/EnergyBarrier.tsv'
+		OUTDIR + '/EnergyBarrier.tsv',
+		OUTDIR + '/Allstates_major_group.tsv'
 	output:
 		OUTDIR + '/dendrogram.RData'
 	benchmark:
