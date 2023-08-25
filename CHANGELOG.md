@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.1.2...v1.2.0) (2023-08-25)
+
+
+### Features
+
+* group name ([50d9c7b](https://github.com/chiba-ai-med/Landscaper/commit/50d9c7bcbe4db04080977899636f5f777672e25a))
+
+
+### Bug Fixes
+
+* dockerrun1.yml ([82e0062](https://github.com/chiba-ai-med/Landscaper/commit/82e006206a1b3d506a6a248c75683138765fa5ef))
+* plot/dag.png ([09804c9](https://github.com/chiba-ai-med/Landscaper/commit/09804c97e7867351f95bd26c90821a37e16be26c))
+
 ## [1.1.2](https://github.com/chiba-ai-med/Landscaper/compare/v1.1.1...v1.1.2) (2023-07-12)
 
 
