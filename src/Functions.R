@@ -27,6 +27,14 @@ library("reshape")
     brewer.pal(8, "Accent"),
     brewer.pal(12, "Paired"),
     brewer.pal(11, "Spectral"),
+    brewer.pal(11, "RdYlGn"),
+    brewer.pal(11, "RdYlBu"),
+    brewer.pal(11, "RdGy"),
+    brewer.pal(11, "RdBu"),
+    brewer.pal(11, "PuOr"),
+    brewer.pal(11, "PRGn"),
+    brewer.pal(11, "PiYG"),
+    brewer.pal(11, "BrBG"),
     "#000000"), 100)
 
 .mycolor2 <- function(n){

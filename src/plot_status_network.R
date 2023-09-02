@@ -142,7 +142,7 @@ if(!is.null(data)){
 	}
 	# Legend
 	mylegend <- names(unique(V(g)))
-	mycolor <- .mycolor1[seq(ncol(data))]
+	mycolor <- .mycolor1[seq_along(mylegend)]
 	known <- setdiff(seq(length(V(g))), grep("Unknown", mylegend))
 	mylegend <- mylegend[known]
 	mycolor <- mycolor[known]
