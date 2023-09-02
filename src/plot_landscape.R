@@ -30,7 +30,7 @@ if(length(E) < 1024){
 			levels = seq(-10, 10, by=1), col = "gray75")
 		plot(g, layout=Coordinate,
 			vertex.label.color = "black",
-			vertex.label.cex = 0.5,
+			vertex.label.cex = 0.75,
 			vertex.size = 1.0,
 			vertex.color = factor(G_sub),
 			edge.arrow.size = 0.1, add = TRUE, axes=FALSE)

@@ -43,7 +43,7 @@ if(length(E) < 1024){
 		vertex.size=3,
 		vertex.color=.mycolor1[G_sub],
 		vertex.label.color="black",
-		vertex.label.cex=0.5,
+		vertex.label.cex=0.75,
 		edge.arrow.size = 0.5)
 	dev.off()
 }else{
@@ -61,7 +61,7 @@ if(length(E) < 1024){
 num_group <- length(unique(G_sub))
 png(file=outfile2, width=2000, height=1000)
 plot(seq(num_group), col=.mycolor1[seq(num_group)],
-	pch=16, cex=10, ylab="Sub group", xlab="", bty="n")
+	pch=16, cex=3, ylab="Sub group", xlab="", bty="n")
 dev.off()
 
 # 2D Network (Energy label)
@@ -72,7 +72,7 @@ if(length(E) < 1024){
 		vertex.size=3,
 		vertex.color=colE,
 		vertex.label.color="black",
-		vertex.label.cex=0.5,
+		vertex.label.cex=0.75,
 		edge.arrow.size = 0.5)
 	dev.off()
 }else{
@@ -189,7 +189,7 @@ if(length(E) < 1024){
 		vertex.size=3,
 		vertex.color=.mycolor2(length(V(g))),
 		vertex.label.color="black",
-		vertex.label.cex=0.5,
+		vertex.label.cex=0.75,
 		edge.arrow.size = 0.5)
 	dev.off()
 }else{
@@ -207,7 +207,7 @@ if(length(E) < 1024){
 num_state <- length(V(g))
 png(file=outfile9, width=2000, height=1000)
 plot(seq(num_state), col=.mycolor2(num_state),
-	pch=16, cex=10, ylab="Sub group", xlab="", bty="n")
+	pch=16, cex=3, ylab="Sub group", xlab="", bty="n")
 dev.off()
 
 # Basin Position
