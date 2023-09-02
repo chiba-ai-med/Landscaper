@@ -31,7 +31,7 @@ if(length(E) < 1024){
 		plot(g, layout=Coordinate,
 			vertex.label.color = "black",
 			vertex.label.cex = 0.75,
-			vertex.size = 1.0,
+			vertex.size = 1.5,
 			vertex.color = factor(G_sub),
 			edge.arrow.size = 0.1, add = TRUE, axes=FALSE)
 		})

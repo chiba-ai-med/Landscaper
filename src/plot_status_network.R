@@ -146,7 +146,7 @@ if(!is.null(data)){
 	png(file=outfile6, width=2000, height=1000)
 	plot.new()
 	legend("center", legend=mylegend, col=mycolor,
-		pch=16, cex=2, ncol=5)
+		pch=16, cex=2, ncol=5, bty="n")
 	dev.off()
 }else{
 	file.create(outfile5)
