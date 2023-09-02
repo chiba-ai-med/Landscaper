@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.10](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.9...v1.2.10) (2023-09-02)
+
+
+### Bug Fixes
+
+* Major/Basin ([6d02f97](https://github.com/chiba-ai-med/Landscaper/commit/6d02f97bb22296f1ab351b19b7b1d1d4b98bd02a))
+
 ## [1.2.9](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.8...v1.2.9) (2023-09-02)
 
 
