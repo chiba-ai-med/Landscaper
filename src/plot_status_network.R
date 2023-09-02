@@ -16,6 +16,8 @@ outfile5 <- args[12]
 outfile6 <- args[13]
 outfile7 <- args[14]
 outfile8 <- args[15]
+outfile9 <- args[16]
+outfile10 <- args[17]
 
 # Load
 E <- unlist(read.table(infile1, header=FALSE))
@@ -151,9 +153,38 @@ if(!is.null(data)){
 	file.create(outfile6)
 }
 
+# 2D Network (Major Group)
+if(!is.null(data)){
+	# Set color
+	major_color <- .mycolor1[seq(ncol(data))]
+	names(major_color) <- colnames(data)
+	major_color <- major_color[Group[,3]]
+	major_color[is.na(major_color)] <- rgb(0,0,0,0)
+	if(length(E) < 1024){
+		png(file=outfile7, width=1000, height=1000)
+		plot(g, layout=Coordinate,
+			vertex.size=3,
+			vertex.color=major_color,
+			vertex.label=NA,
+			edge.arrow.size = 0.5)
+		dev.off()
+	}else{
+		png(file=outfile7, width=1500, height=1500)
+		plot(g, layout=Coordinate,
+			vertex.size=1,
+			vertex.color=major_color,
+			vertex.label=NA,
+			edge.arrow.size = 0.5)
+		dev.off()
+	}
+}else{
+	file.create(outfile7)
+}
+
+
 # State
 if(length(E) < 1024){
-	png(file=outfile7, width=1000, height=1000)
+	png(file=outfile8, width=1000, height=1000)
 	plot(g, layout=Coordinate,
 		vertex.size=3,
 		vertex.color=.mycolor2(length(V(g))),
@@ -162,7 +193,7 @@ if(length(E) < 1024){
 		edge.arrow.size = 0.5)
 	dev.off()
 }else{
-	png(file=outfile7, width=1500, height=1500)
+	png(file=outfile8, width=1500, height=1500)
 	plot(g, layout=Coordinate,
 		vertex.size=1,
 		vertex.color=.mycolor2(length(V(g))),
@@ -174,7 +205,29 @@ if(length(E) < 1024){
 
 # Legend
 num_state <- length(V(g))
-png(file=outfile8, width=2000, height=1000)
+png(file=outfile9, width=2000, height=1000)
 plot(seq(num_state), col=.mycolor2(num_state),
 	pch=16, cex=10, ylab="Sub group", xlab="", bty="n")
 dev.off()
+
+# Basin Position
+basin_color <- rep(rgb(0,0,0,0), length=length(V(g)))
+basin_color[Basin] <- rgb(1,0,0)
+
+if(length(E) < 1024){
+	png(file=outfile10, width=1000, height=1000)
+	plot(g, layout=Coordinate,
+		vertex.size=3,
+		vertex.color=basin_color,
+		vertex.label=NA,
+		edge.arrow.size = 0.5)
+	dev.off()
+}else{
+	png(file=outfile10, width=1500, height=1500)
+	plot(g, layout=Coordinate,
+		vertex.size=1,
+		vertex.color=basin_color,
+		vertex.label=NA,
+		edge.arrow.size = 0.5)
+	dev.off()
+}

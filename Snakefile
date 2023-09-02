@@ -228,8 +228,10 @@ rule plot_status_network:
 		OUTDIR + '/plot/StatusNetwork_Energy_legend.png',
 		OUTDIR + '/plot/StatusNetwork_Ratio.png',
 		OUTDIR + '/plot/StatusNetwork_Ratio_legend.png',
+		OUTDIR + '/plot/StatusNetwork_Major.png',
 		OUTDIR + '/plot/StatusNetwork_State.png',
-		OUTDIR + '/plot/StatusNetwork_State_legend.png'
+		OUTDIR + '/plot/StatusNetwork_State_legend.png',
+		OUTDIR + '/plot/StatusNetwork_Basin.png'
 	benchmark:
 		OUTDIR + '/benchmarks/plot_status_network.txt'
 	log:
