@@ -63,7 +63,7 @@ if(length(Basin) == 1){
       mutate(leaf_no = row_number()) |>
       mutate(leaf_no = as.character(leaf_no)) -> leaf2state
     if(!is.null(Group)){
-        leaf2state$state <- Group[leaf2state$state, 9]
+        leaf2state$state <- Group[leaf2state$state, ncol(Group)]
     }
 
     # assume top node is used by all subtrees
