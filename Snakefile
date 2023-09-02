@@ -38,6 +38,7 @@ rule all:
 		OUTDIR + '/major_group.tsv',
 		OUTDIR + '/Allstates_major_group.tsv',
 		OUTDIR + '/plot/ratio_group.png',
+		OUTDIR + '/plot/ratio_group_legend.png',
 		OUTDIR + '/plot/Allstates.png',
 		OUTDIR + '/plot/Freq_Prob_Energy.png',
 		OUTDIR + '/plot/h.png',
@@ -167,7 +168,8 @@ rule plot_ratio_group:
 	input:
 		OUTDIR + '/ratio_group.tsv'
 	output:
-		OUTDIR + '/plot/ratio_group.png'
+		OUTDIR + '/plot/ratio_group.png',
+		OUTDIR + '/plot/ratio_group_legend.png'
 	benchmark:
 		OUTDIR + '/benchmarks/plot_ratio_group.txt'
 	log:

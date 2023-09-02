@@ -41,7 +41,7 @@ if(length(E) < 1024){
 		vertex.size=3,
 		vertex.color=.mycolor1[G_sub],
 		vertex.label.color="black",
-		vertex.label.cex=1.5,
+		vertex.label.cex=0.5,
 		edge.arrow.size = 0.5)
 	dev.off()
 }else{
@@ -50,7 +50,7 @@ if(length(E) < 1024){
 		vertex.size=1,
 		vertex.color=.mycolor1[G_sub],
 		vertex.label.color="black",
-		vertex.label.cex=1.2,
+		vertex.label.cex=0.5,
 		edge.arrow.size = 0.5)
 	dev.off()
 }
@@ -70,7 +70,7 @@ if(length(E) < 1024){
 		vertex.size=3,
 		vertex.color=colE,
 		vertex.label.color="black",
-		vertex.label.cex=1.5,
+		vertex.label.cex=0.5,
 		edge.arrow.size = 0.5)
 	dev.off()
 }else{
@@ -79,7 +79,7 @@ if(length(E) < 1024){
 		vertex.size=1,
 		vertex.color=colE,
 		vertex.label.color="black",
-		vertex.label.cex=1.2,
+		vertex.label.cex=0.5,
 		edge.arrow.size = 0.5)
 	dev.off()
 }
@@ -141,11 +141,15 @@ if(!is.null(data)){
 		dev.off()
 	}
 	# Legend
+	mylegend <- names(unique(V(g)))
+	mycolor <- .mycolor1[seq(ncol(data))]
+	known <- setdiff(seq(length(V(g))), grep("Unknown", mylegend))
+	mylegend <- mylegend[known]
+	mycolor <- mycolor[known]
 	png(file=outfile6, width=2000, height=1000)
 	plot.new()
-	legend("center", legend=colnames(data),
-		col=.mycolor1[seq(ncol(data))],
-		pch=16, cex=2, ncol=10)
+	legend("center", legend=mylegend, col=mycolor,
+		pch=16, cex=2, ncol=8)
 	dev.off()
 }else{
 	file.create(outfile5)
@@ -159,7 +163,7 @@ if(length(E) < 1024){
 		vertex.size=3,
 		vertex.color=.mycolor2(length(V(g))),
 		vertex.label.color="black",
-		vertex.label.cex=1.5,
+		vertex.label.cex=0.5,
 		edge.arrow.size = 0.5)
 	dev.off()
 }else{
@@ -168,7 +172,7 @@ if(length(E) < 1024){
 		vertex.size=1,
 		vertex.color=.mycolor2(length(V(g))),
 		vertex.label.color="black",
-		vertex.label.cex=1.2,
+		vertex.label.cex=0.5,
 		edge.arrow.size = 0.5)
 	dev.off()
 }

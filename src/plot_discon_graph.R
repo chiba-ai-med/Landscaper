@@ -17,7 +17,7 @@ if(is.null(hc)){
     dg_skeleton %>%
       ggplot() +
       geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
-      geom_text(aes(x = xend, y = yend - 0.05, label = state)) +
+      geom_text(aes(x = xend, y = yend - 0.05, label = state), size=3) +
       theme_bw() +
       theme(axis.text.x=element_blank(),
             axis.ticks.x=element_blank(),
@@ -29,7 +29,7 @@ if(is.null(hc)){
       ggplot() +
       geom_segment(aes(x = x, y = y, xend = xend, yend = y)) +
       geom_segment(aes(x = xend, y = y, xend = xend, yend = yend)) +
-      geom_text(aes(x = xend, y = yend - 0.05, label = state)) +
+      geom_text(aes(x = xend, y = yend - 0.05, label = state), size=3) +
       theme_bw() +
       theme(axis.text.x=element_blank(),
             axis.ticks.x=element_blank(),
