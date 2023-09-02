@@ -28,13 +28,13 @@ if(length(Basin) == 1){
 	if(is.null(Group)){
 		Allstates <- data.frame(id=factor(Basin, levels=Basin), t(Allstates[Basin, ]))
 	}else{
-		Allstates <- data.frame(id=factor(Group[Basin, 9], levels=Group[Basin, 9]), t(Allstates[Basin, ]))
+		Allstates <- data.frame(id=factor(Group[Basin, ncol(Group)], levels=Group[Basin, ncol(Group)]), t(Allstates[Basin, ]))
 	}
 }else{
 	if(is.null(Group) == 1){
 		Allstates <- data.frame(id=factor(Basin, levels=Basin), Allstates[Basin, ])
 	}else{
-		Allstates <- data.frame(id=factor(Group[Basin, 9], levels=Group[Basin, 9]), Allstates[Basin, ])
+		Allstates <- data.frame(id=factor(Group[Basin, ncol(Group)], levels=Group[Basin, ncol(Group)]), Allstates[Basin, ])
 	}
 }
 colnames(Allstates)[2:ncol(Allstates)] <- colnames_Allstates
