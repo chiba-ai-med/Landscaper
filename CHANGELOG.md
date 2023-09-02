@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.2...v1.2.3) (2023-09-02)
+
+
+### Bug Fixes
+
+* Row/Column Names for Adjacent Matrix ([ec5f889](https://github.com/chiba-ai-med/Landscaper/commit/ec5f88980fa4c5fe619171f34e7c2e94a1cecca9))
+
 ## [1.2.2](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.1...v1.2.2) (2023-09-02)
 
 
