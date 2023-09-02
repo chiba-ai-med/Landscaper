@@ -11,6 +11,10 @@ Allstates <- read.delim(infile1, header=FALSE, sep="X")
 data <- unlist(read.delim(infile2, header=FALSE, sep="X"))
 
 # Preprocess
+# Non-tab delimited file
+if(length(grep("\t", data)) == 0){
+    data <- gsub(" ", "\t", data)
+}
 Allstates <- data.frame(state=apply(Allstates, 1, function(x){gsub(" ", "\t", x)}))
 
 if(group != "None"){
