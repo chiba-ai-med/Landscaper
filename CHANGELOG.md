@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.0...v1.2.1) (2023-09-02)
+
+
+### Bug Fixes
+
+* Non-tab delimited File ([d0a3bc8](https://github.com/chiba-ai-med/Landscaper/commit/d0a3bc8108bf4c9e470c554479daf4062aa84685))
+
 ## [1.2.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.1.2...v1.2.0) (2023-08-25)
 
 
