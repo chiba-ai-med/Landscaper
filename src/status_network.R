@@ -37,8 +37,8 @@ A <- t(apply(G_ngh * E, 2, function(x){
 	out
 	}))
 if(!is.null(Group)){
-	rownames(A) <- Group[, 9]
-	colnames(A) <- Group[, 9]
+	rownames(A) <- Group[, ncol(Group)]
+	colnames(A) <- Group[, ncol(Group)]
 }
 
 # Sub Graph Label
