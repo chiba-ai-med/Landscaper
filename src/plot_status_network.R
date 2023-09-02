@@ -98,13 +98,11 @@ if(!is.null(data)){
 	values <- lapply(seq_along(V(g)), function(x){
 		rep(1, length=ncol(data))
 	})
-	vcolor <- rep(rgb(1,1,1), length=length(g))
+	mask_color <- rep(rgb(1,1,1), length=length(g))
 	for(i in seq_len(length(g))){
-		check <- length(grep("Unknown", Group[i, 3])) != 1
-		if(check){
-			target <- which(rownames(data) == Group[i, 1])
-			values[[i]] <- as.numeric(data[target, ])
-			vcolor[i] <- rgb(0,0,0,0)
+		if(sum(data[i,]) != 0){
+			values[[i]] <- unlist(data[i,])
+			mask_color[i] <- rgb(0,0,0,0)
 		}
 	}
 	if(length(E) < 1024){
@@ -119,7 +117,7 @@ if(!is.null(data)){
 		par(new=TRUE)
 		plot(g, layout=Coordinate,
 			vertex.size=3,
-			vertex.color=vcolor,
+			vertex.color=mask_color,
 			vertex.label=NA,
 			edge.arrow.size = 0)
 		dev.off()
@@ -135,17 +133,14 @@ if(!is.null(data)){
 		par(new=TRUE)
 		plot(g, layout=Coordinate,
 			vertex.size=1,
-			vertex.color=vcolor,
+			vertex.color=mask_color,
 			vertex.label=NA,
 			edge.arrow.size = 0)
 		dev.off()
 	}
 	# Legend
-	mylegend <- names(unique(V(g)))
-	mycolor <- .mycolor1[seq_along(mylegend)]
-	known <- setdiff(seq(length(V(g))), grep("Unknown", mylegend))
-	mylegend <- mylegend[known]
-	mycolor <- mycolor[known]
+	mylegend <- colnames(data)
+	mycolor <- .mycolor1[seq(ncol(data))]
 	png(file=outfile6, width=2000, height=1000)
 	plot.new()
 	legend("center", legend=mylegend, col=mycolor,
