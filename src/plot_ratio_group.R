@@ -27,7 +27,7 @@ if(file.size(infile) != 0){
 	g <- g + facet_wrap(~variable)
 	g <- g + scale_fill_manual(values=.mycolor2(length(unique(gdata$state))))
 	g1 <- g + theme(legend.position = "none")
-	g2 <- gtable::gtable_filter(ggplotGrob(g_tmp), pattern = "guide-box")
+	g2 <- gtable::gtable_filter(ggplotGrob(g), pattern = "guide-box")
 	# Save
 	ggsave(outfile1, plot=g1, width=15, height=20)
 	ggsave(outfile2, plot=g2, width=15, height=20)
