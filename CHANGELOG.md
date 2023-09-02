@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.8](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.7...v1.2.8) (2023-09-02)
+
+
+### Bug Fixes
+
+* Plot Settings ([dae2988](https://github.com/chiba-ai-med/Landscaper/commit/dae2988b790a7c03a7d2a578d1c8cfaa034e9f86))
+
 ## [1.2.7](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.6...v1.2.7) (2023-09-02)
 
 
