@@ -9,7 +9,7 @@ on:
 
 jobs:
     unit-test-job:
-        name: run unit-test job (1/4)
+        name: run unit-test job (1/3)
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
