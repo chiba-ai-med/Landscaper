@@ -50,14 +50,14 @@ Basin <- sapply(unique(G_sub), function(x){
 })
 
 if(coordinate_file != "None"){
+	Coordinate <- read.table(coordinate_file, header=FALSE)
+}else{
 	# 2D Coordinate
 	lay_init <- layout_with_kk(g) # Kamada-Kawai layout
 	set.seed(seed)
 	lay <- layout_with_fr(g, coords = lay_init, niter = 1000,
 	                      grid = "nogrid") # FR layout with KK-initialization
 	Coordinate <- layout.norm(lay, -1, 1, -1, 1) # normalization
-}else{
-	Coordinate <- read.table(coordinate_file, header=FALSE)
 }
 
 # Save

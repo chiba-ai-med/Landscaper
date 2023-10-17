@@ -4,7 +4,7 @@ args <- commandArgs(trailingOnly = TRUE)
 infile1 <- args[1]
 infile2 <- args[2]
 outfile <- args[3]
-group <- args[4]
+group_file <- args[4]
 
 # Load
 Allstates <- read.delim(infile1, header=FALSE, sep="X")
@@ -17,8 +17,8 @@ if(length(grep("\t", data)) == 0){
 }
 Allstates <- data.frame(state=apply(Allstates, 1, function(x){gsub(" ", "\t", x)}))
 
-if(group != "None"){
-    group <- unlist(read.delim(group, header=FALSE))
+if(group_file != "None"){
+    group <- unlist(read.delim(group_file, header=FALSE))
     out <- merge(Allstates, as.data.frame(.ratio_group(data, group)),
         by="state", all=TRUE)
     out <- pivot_wider(out, names_from=group, values_from=Freq)
