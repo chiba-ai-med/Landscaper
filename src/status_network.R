@@ -10,6 +10,7 @@ outfile3 <- args[6]
 outfile4 <- args[7]
 outfile5 <- args[8]
 seed <- args[9]
+coordinate_file <- args[10]
 
 # Load
 Allstates <- as.matrix(read.table(infile1, header=FALSE))
@@ -48,12 +49,16 @@ Basin <- sapply(unique(G_sub), function(x){
 	which(E == min(E[which(G_sub == x)]))
 })
 
-# 2D Coordinate
-lay_init <- layout_with_kk(g) # Kamada-Kawai layout
-set.seed(seed)
-lay <- layout_with_fr(g, coords = lay_init, niter = 1000,
-                      grid = "nogrid") # FR layout with KK-initialization
-Coordinate <- layout.norm(lay, -1, 1, -1, 1) # normalization
+if(coordinate_file != "None"){
+	# 2D Coordinate
+	lay_init <- layout_with_kk(g) # Kamada-Kawai layout
+	set.seed(seed)
+	lay <- layout_with_fr(g, coords = lay_init, niter = 1000,
+	                      grid = "nogrid") # FR layout with KK-initialization
+	Coordinate <- layout.norm(lay, -1, 1, -1, 1) # normalization
+}else{
+	Coordinate <- read.table(coordinate_file, header=FALSE)
+}
 
 # Save
 write.table(A, outfile1, quote=FALSE, row.names=FALSE, col.names=FALSE)

@@ -24,7 +24,7 @@ if len(mat.shape) == 1:
     print("There is only one variable.")
     quit()
 else:
-    if mat.shape[1] > 12:
+    if mat.shape[1] > 21:
         np.savetxt(outfile1, [1], fmt="%d")
     else:
         np.savetxt(outfile1, [0], fmt="%d")

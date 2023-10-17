@@ -3,7 +3,7 @@
 # Help page
 showHelp() {
     cat << EOF
-Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--seed/--group/--colnames/--memgb/-h/-v]
+Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--seed/--group/--colnames/--coordinate/--memgb/-h/-v]
 Landscaper: Snakemake workflow to perform Energy Landscape Analysis
 
     -i, -input,         --input                 Input file (e.g., data/testdata.tsv, mandatory)
@@ -17,6 +17,8 @@ Landscaper: Snakemake workflow to perform Energy Landscape Analysis
     -g, -group,      --group                    Group of input matrix
 
     -l, -colnames,      --colnames              Column/variable names for data matrix
+
+    -d, -coordinate,      --coordinate          Coordinates (e.g, t-SNE, UMAP)
 
     -m, -memgb,         --memgb                 Memory usage (GB, e.g., default value is 10, optional)
 
@@ -34,11 +36,12 @@ CORES=10
 SEED=123456
 GROUP=""
 COLNAMES=""
+COORDINATE=""
 MEMGB=10
-VERSION="v1.1.0"
+VERSION="v1.3.0"
 
 # Command Argument Parsing
-while getopts i:o:c:s:g:l:m:h-:v- opt; do
+while getopts i:o:c:s:g:l:d:m:h-:v- opt; do
 	optarg="$OPTARG"
 	[[ "$opt" = - ]] &&
 	    opt="-${OPTARG%%=*}" &&
@@ -63,6 +66,9 @@ while getopts i:o:c:s:g:l:m:h-:v- opt; do
         -l|--colnames)
             COLNAMES="$optarg"
             ;;
+        -d|--corrdinate)
+            COORDINATE="$optarg"
+            ;;
         -m|--memgb)
             MEMGB="$optarg"
             ;;
@@ -82,4 +88,4 @@ done
 shift $((OPTIND - 1))
 
 # Perform Snakemake Workflow
-snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR seed=$SEED group=$GROUP colnames=$COLNAMES --resources mem_gb=$MEMGB
+snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR seed=$SEED group=$GROUP colnames=$COLNAMES coordinate=$COORDINATE --resources mem_gb=$MEMGB

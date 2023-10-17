@@ -26,7 +26,7 @@ if COLNAMES != None:
 	if not(is_file):
 		raise FileNotFoundError("Please check the file for colnames exists")
 
-# COORDINATE = config["coordinate"]
+COORDINATE = config["coordinate"]
 # TYPE = config["type"] # TEXT, Seurat, Loom, 10X
 
 # Docker Container
@@ -196,7 +196,7 @@ rule status_network:
 	log:
 		OUTDIR + '/logs/status_network.log'
 	shell:
-		'src/status_network.sh {input} {output} {SEED} >& {log}'
+		'src/status_network.sh {input} {output} {SEED} {COORDINATE} >& {log}'
 
 rule plot_basin:
 	input:
