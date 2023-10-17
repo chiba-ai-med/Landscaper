@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.3.0...v1.3.1) (2023-10-17)
+
+
+### Bug Fixes
+
+* Snakefile ([4a0ab22](https://github.com/chiba-ai-med/Landscaper/commit/4a0ab22a37a3c1685eef715409e7fae2ef45ea7c))
+
 ## [1.3.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.11...v1.3.0) (2023-10-17)
 
 
