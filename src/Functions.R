@@ -14,6 +14,8 @@ library("GGally")
 library("mclust")
 library("reshape")
 
+"%ni%" <- Negate("%in%")
+
 #################################################
 # Group Information
 #################################################

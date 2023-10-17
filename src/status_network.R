@@ -45,6 +45,14 @@ if(!is.null(Group)){
 # Sub Graph Label
 g <- graph_from_adjacency_matrix(A)
 G_sub <- clusters(g)$membership
+
+# Remove singletons
+tabG_sub <- table(G_sub)
+singletons <- names(tabG_sub)[tabG_sub == 1]
+if(length(singletons) != 0){
+	G_sub <- G_sub[G_sub %ni% singletons]
+}
+
 Basin <- sapply(unique(G_sub), function(x){
 	which(E == min(E[which(G_sub == x)]))
 })
