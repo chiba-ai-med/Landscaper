@@ -27,7 +27,6 @@ if COLNAMES != None:
 		raise FileNotFoundError("Please check the file for colnames exists")
 
 COORDINATE = config["coordinate"]
-
 # TYPE = config["type"] # TEXT, Seurat, Loom, 10X
 
 # Docker Container

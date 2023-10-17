@@ -38,7 +38,7 @@ GROUP=""
 COLNAMES=""
 COORDINATE=""
 MEMGB=10
-VERSION="v1.3.0"
+VERSION="v1.3.1"
 
 # Command Argument Parsing
 while getopts i:o:c:s:g:l:d:m:h-:v- opt; do
