@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.11...v1.3.0) (2023-10-17)
+
+
+### Features
+
+* Corrdinate ([1e67001](https://github.com/chiba-ai-med/Landscaper/commit/1e6700168593f6fca68bf63fdda2669be3810dd5))
+* Corrdinate ([fd1878d](https://github.com/chiba-ai-med/Landscaper/commit/fd1878dd304be51278bf6865d0e3c0dac7a58783))
+* Corrdinate ([d31977b](https://github.com/chiba-ai-med/Landscaper/commit/d31977b5737570f02c87bb1f02ffb9b0f13d5885))
+* rm Singletons ([a6a5887](https://github.com/chiba-ai-med/Landscaper/commit/a6a58873073caecad383a73ce6828e5d25a5a46e))
+
+
+### Bug Fixes
+
+* Plot Settings ([a9b794f](https://github.com/chiba-ai-med/Landscaper/commit/a9b794f4a6cfe1ac13cacfe411e5f821c5267cea))
+
 ## [1.2.11](https://github.com/chiba-ai-med/Landscaper/compare/v1.2.10...v1.2.11) (2023-09-02)
 
 
