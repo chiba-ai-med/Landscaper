@@ -10,15 +10,15 @@ Landscaper: Snakemake workflow to perform Energy Landscape Analysis
 
     -o, -outdir,        --outdir                Output directory (e.g., output, mandatory)
 
-    -c, -cores,         --cores                 Number of cores to use Snakemake (e.g., default value is 10, optional)
+    -c, -cores,         --cores                 Number of cores to use Snakemake (Default value is 10, optional)
 
-    -s, -seed,          --seed                  Random seed used when visualize status network
+    -s, -seed,          --seed                  Random seed used when visualize status network (Default value is 123456) (optional)
 
-    -g, -group,      --group                    Group of input matrix
+    -g, -group,      --group                    Group of input matrix (Default value is "None") (optional)
 
-    -l, -colnames,      --colnames              Column/variable names for data matrix
+    -l, -colnames,      --colnames              Column/variable names for data matrix (Default value is "None") (optional)
 
-    -d, -coordinate,      --coordinate          2D Coordinates of states (e.g, t-SNE, UMAP)
+    -d, -coordinate,      --coordinate          2D Coordinates of states (e.g, t-SNE, UMAP) (Default value is "None") (optional)
 
     -m, -memgb,         --memgb                 Memory usage (GB, e.g., default value is 10, optional)
 
@@ -34,11 +34,11 @@ INPUT=""
 OUTDIR=""
 CORES=10
 SEED=123456
-GROUP=""
-COLNAMES=""
-COORDINATE=""
+GROUP="None"
+COLNAMES="None"
+COORDINATE="None"
 MEMGB=10
-VERSION="v1.3.1"
+VERSION="v1.4.0"
 
 # Command Argument Parsing
 while getopts i:o:c:s:g:l:d:m:h-:v- opt; do

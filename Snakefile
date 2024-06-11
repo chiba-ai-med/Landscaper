@@ -12,21 +12,26 @@ INPUT = config["input"]
 OUTDIR = config["outdir"]
 
 # Optional Arguments
-SEED = config["seed"]
+SEED = config.get("seed", "None")
+if SEED == "None":
+	SEED = 123456
+else:
+	SEED = int(SEED)
 
-GROUP = config["group"]
-if GROUP != None:
+GROUP = config.get("group", "None")
+if GROUP != "None":
 	is_file = os.path.isfile(GROUP)
 	if not(is_file):
 		raise FileNotFoundError("Please check the file for group exists")
 
-COLNAMES = config["colnames"]
-if COLNAMES != None:
+COLNAMES = config.get("colnames", "None")
+if COLNAMES != "None":
 	is_file = os.path.isfile(COLNAMES)
 	if not(is_file):
 		raise FileNotFoundError("Please check the file for colnames exists")
 
-COORDINATE = config["coordinate"]
+COORDINATE = config.get("coordinate", "None")
+
 # TYPE = config["type"] # TEXT, Seurat, Loom, 10X
 
 # Docker Container

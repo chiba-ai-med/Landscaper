@@ -60,7 +60,7 @@ Next, perform `Landscaper` by the `snakemake` command as follows.
 
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output \
-seed=123456 group="" coordinate="" \
+seed=123456 group="None" coordinate="None" \
 --resources mem_gb=10
 ```
 
@@ -70,10 +70,10 @@ The meanings of all the arguments are below.
 - `--config`: Snakemake option to set [the configuration](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) (mandatory)
 - `input`: Input file (e.g., data/testdata.tsv, mandatory)
 - `outdir`: Output directory (e.g., output, mandatory)
-- `seed`: Random seed used when visualize status network (e.g., 123456) (optional)
-- `group`: Group of input matrix (e.g., data/group.tsv) (optional)
-- `colnames`: Column names of input matrix (e.g., data/colnames.tsv) (optional)
-- `coordinate`: 2D Coordinates of states (e.g, t-SNE, UMAP) (optional)
+- `seed`: Random seed used when visualize status network (Default value is 123456) (optional)
+- `group`: Group of input matrix (Default value is "None") (optional)
+- `colnames`: Column names of input matrix (Default value is "None") (optional)
+- `coordinate`: 2D Coordinates of states (e.g, t-SNE, UMAP) (Default value is "None") (optional)
 - `--resources`: Snakemake option to control [resources](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources) (optional)
 - `mem_gb`: Memory usage (GB, e.g. 10, optional)
 
