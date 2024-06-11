@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.3.1...v1.4.0) (2024-06-11)
+
+
+### Features
+
+* Optional Parameter ([fd563f0](https://github.com/chiba-ai-med/Landscaper/commit/fd563f0336822e9438e7320f54f54116ef1c9de1))
+
 ## [1.3.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.3.0...v1.3.1) (2023-10-17)
 
 
