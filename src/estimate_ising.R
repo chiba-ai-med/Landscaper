@@ -30,7 +30,7 @@ if(covfile == "None"){
 	# {h*,J*} Parameter
 	h_ <- res[[1]][, 1]
 	g_ <- res[[1]][, 2:(ncol(cov_data)+1)]
-	J_ <- res[[1]][, (ncol(cov_data)+1):ncol(res$[[1]])]
+	J_ <- res[[1]][, (ncol(cov_data)+2):ncol(res[[1]])]
 	# {0,1} => {-1,1}
 	res2 <- LinTransform(
 		graph=J_, thresholds=h_,
