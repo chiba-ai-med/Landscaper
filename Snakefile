@@ -41,7 +41,7 @@ COORDINATE = config.get("coordinate", "None")
 # TYPE = config["type"] # TEXT, Seurat, Loom, 10X
 
 # Docker Container
-container: 'docker://koki/landscaper_component:20230815'
+container: 'docker://koki/landscaper_component:20240705'
 
 # All Rules
 rule all:

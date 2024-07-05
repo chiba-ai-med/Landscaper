@@ -12,7 +12,7 @@ outfile7 <- args[8]
 covfile <- args[9]
 
 # Load
-data <- read.table(infile, header=FALSE)
+data <- as.matrix(read.table(infile, header=FALSE))
 
 if(covfile == "None"){
 	# Fitting
@@ -22,13 +22,11 @@ if(covfile == "None"){
 	J <- res$graph
 }else{
 	# Load
-	cov_data <- read.table(covfile, header=FALSE)
+	cov_data <- as.matrix(read.table(covfile, header=FALSE))
 	# {-1,1} => {0,1}
 	data[which(data == -1)] <- 0
 	# Fitting
-	res <- runSA(
-		ocmat=as.matri(data), enmat=as.matrix(cov_data),
-		threads=1, qth=10^-3)
+	res <- runSA(ocmat=data, enmat=cov_data, threads=1, qth=10^-3)
 	# {h*,J*} Parameter
 	h_ <- res[[1]][, 1]
 	g_ <- res[[1]][, 2:(ncol(cov_data)+1)]
