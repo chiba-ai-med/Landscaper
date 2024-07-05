@@ -13,6 +13,8 @@ library("viridis")
 library("GGally")
 library("mclust")
 library("reshape")
+library("snow")
+library("doParallel")
 library("rELA")
 
 "%ni%" <- Negate("%in%")
