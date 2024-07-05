@@ -30,9 +30,9 @@ if(covfile == "None"){
 		ocmat=as.matri(data), enmat=as.matrix(cov_data),
 		threads=1, qth=10^-3)
 	# {h*,J*} Parameter
-	h_ <- res$[[1]][, 1]
-	g_ <- res$[[1]][, 2:(ncol(cov_data)+1)]
-	J_ <- res$[[1]][, (ncol(cov_data)+1):ncol(res$[[1]])]
+	h_ <- res[[1]][, 1]
+	g_ <- res[[1]][, 2:(ncol(cov_data)+1)]
+	J_ <- res[[1]][, (ncol(cov_data)+1):ncol(res$[[1]])]
 	# {0,1} => {-1,1}
 	res2 <- LinTransform(
 		graph=J_, thresholds=h_,
