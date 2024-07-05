@@ -13,6 +13,7 @@ library("viridis")
 library("GGally")
 library("mclust")
 library("reshape")
+library("rELA")
 
 "%ni%" <- Negate("%in%")
 

@@ -9,11 +9,11 @@ on:
 
 jobs:
     unit-test-job:
-        name: run unit-test job (2/4)
+        name: run unit-test job (4/4)
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
               uses: actions/checkout@v3
-            - name: src/test_01.sh
+            - name: src/test.sh
               run: |
-                  echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u kokitsuyuzaki --password-stdin && src/test_01.sh
+                  echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u kokitsuyuzaki --password-stdin && src/test_cov.sh

@@ -30,6 +30,12 @@ if COLNAMES != "None":
 	if not(is_file):
 		raise FileNotFoundError("Please check the file for colnames exists")
 
+COVARIATE = config.get("covariate", "None")
+if COVARIATE != "None":
+	is_file = os.path.isfile(COVARIATE)
+	if not(is_file):
+		raise FileNotFoundError("Please check the file for covariate exists")
+
 COORDINATE = config.get("coordinate", "None")
 
 # TYPE = config["type"] # TEXT, Seurat, Loom, 10X
@@ -116,7 +122,7 @@ rule estimate_ising:
 	log:
 		OUTDIR + '/logs/estimate_ising.log'
 	shell:
-		'src/estimate_ising.sh {input} {output} >& {log}'
+		'src/estimate_ising.sh {input} {output} {COVARIATE} >& {log}'
 
 rule plot_parameters:
 	input:
