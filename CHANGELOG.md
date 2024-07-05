@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.5.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.4.1...v1.5.0) (2024-07-05)
+
+
+### Features
+
+* covariance ([ddcd597](https://github.com/chiba-ai-med/Landscaper/commit/ddcd5977bcc276083141c00e5d9338ad6cfd42f6))
+* covariance ([7e279d3](https://github.com/chiba-ai-med/Landscaper/commit/7e279d393ffb96da9a2d659ccf0de3928b2ef45a))
+* covariance ([804d025](https://github.com/chiba-ai-med/Landscaper/commit/804d025aa9ec92765f77122d50aa11a5b41c0b96))
+* covariance ([ad06ca9](https://github.com/chiba-ai-med/Landscaper/commit/ad06ca970a5fb6992aa57dbce814ced63ce052d2))
+* covariance ([1d656a4](https://github.com/chiba-ai-med/Landscaper/commit/1d656a44137002d9e468ef998a9ee150e9784004))
+* covariance ([d297b20](https://github.com/chiba-ai-med/Landscaper/commit/d297b209125dc94e21a816aaf285780c63f15dd1))
+* covariance ([9c1d416](https://github.com/chiba-ai-med/Landscaper/commit/9c1d41692c61b193945c61a751d1a73c4106be3c))
+* covariance ([30c078a](https://github.com/chiba-ai-med/Landscaper/commit/30c078aae3e89ca4c28bc0a5d1c21fa251c063fc))
+* covariance ([06f6aa7](https://github.com/chiba-ai-med/Landscaper/commit/06f6aa7e0159ed245f93a07bf3c791512180ee22))
+* covariance ([b2dc2ce](https://github.com/chiba-ai-med/Landscaper/commit/b2dc2cea34d3635e1524e0ab86e12fce1ba29fca))
+
 ## [1.4.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.4.0...v1.4.1) (2024-07-05)
 
 
