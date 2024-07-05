@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.4.0...v1.4.1) (2024-07-05)
+
+
+### Bug Fixes
+
+* Revert to v1.4.0 ([1e1b6b8](https://github.com/chiba-ai-med/Landscaper/commit/1e1b6b8ccc63dfcce4c4866a66bc754f199246bb))
+
 ## [1.4.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.3.1...v1.4.0) (2024-06-11)
 
 
