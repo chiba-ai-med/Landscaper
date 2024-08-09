@@ -59,3 +59,4 @@ covariate=time_dapt.tsv \
 snakemake -j 4 --config input=output_log_seurat_beta0/U.tsv outdir=output_log_seurat_beta0_cov \
 covariate=time_dapt.tsv \
 --resources mem_gb=10 --use-singularity
+
