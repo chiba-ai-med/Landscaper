@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.5.0...v1.6.0) (2024-08-09)
+
+
+### Features
+
+* Sparse Matrix ([37d3f02](https://github.com/chiba-ai-med/Landscaper/commit/37d3f02d88979b148a133e8464c4b8a26edebefb))
+* Sparse Matrix ([eac32c6](https://github.com/chiba-ai-med/Landscaper/commit/eac32c61126a98bc8e841720651901e80b5b9365))
+
 ## [1.5.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.4.1...v1.5.0) (2024-07-05)
 
 
