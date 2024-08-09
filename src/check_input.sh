@@ -10,4 +10,10 @@
 #SBATCH -p node03-06
 SLURM_RESTART_COUNT=2
 
-python3 src/mycheck_input.py $@
+if [ $5 = "FALSE" ]; then
+	echo "Dense Matrix"
+	python3 src/mycheck_input.py $@
+else
+	echo "Sparse Matrix"
+	python3 src/mycheck_input_sparse.py $@
+fi

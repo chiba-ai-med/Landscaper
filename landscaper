@@ -3,7 +3,7 @@
 # Help page
 showHelp() {
     cat << EOF
-Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--seed/--group/--colnames/--coordinate/--covariate/--memgb/-h/-v]
+Usage: ./landscaper -i <input-file> -o <output-directory> [--cores/--seed/--group/--colnames/--coordinate/--covariate/--input_sparse/--memgb/-h/-v]
 Landscaper: Snakemake workflow to perform Energy Landscape Analysis
 
     -i, -input,         --input                 Input file (e.g., data/testdata.tsv, mandatory)
@@ -21,6 +21,8 @@ Landscaper: Snakemake workflow to perform Energy Landscape Analysis
     -d, -coordinate,      --coordinate          2D Coordinates of states (e.g, t-SNE, UMAP) (Default value is "None") (optional)
 
     -e, -covariate,       --covariate          Covariate file of input data such as time points or experimental conditions (e.g., data/cov_data.tsv, optional)
+
+    -p, -input_sparse,    --input_sparse       Whether the input data is formatted as Matrix Market <MM> (Default value is FALSE)
 
     -m, -memgb,         --memgb                 Memory usage (GB, e.g., default value is 10, optional)
 
@@ -40,11 +42,12 @@ GROUP="None"
 COLNAMES="None"
 COORDINATE="None"
 COVARIATE="None"
+INPUT_SPARSE="FALSE"
 MEMGB=10
-VERSION="v1.5.0"
+VERSION="v1.6.0"
 
 # Command Argument Parsing
-while getopts i:o:c:s:g:l:d:e:m:h-:v- opt; do
+while getopts i:o:c:s:g:l:d:e:p:m:h-:v- opt; do
 	optarg="$OPTARG"
 	[[ "$opt" = - ]] &&
 	    opt="-${OPTARG%%=*}" &&
@@ -75,6 +78,9 @@ while getopts i:o:c:s:g:l:d:e:m:h-:v- opt; do
         -e|--covariate)
             COVARIATE="$optarg"
             ;;
+        -p|--input_sparse)
+            INPUT_SPARSE="$optarg"
+            ;;
         -m|--memgb)
             MEMGB="$optarg"
             ;;
@@ -94,4 +100,8 @@ done
 shift $((OPTIND - 1))
 
 # Perform Snakemake Workflow
-snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR seed=$SEED group=$GROUP colnames=$COLNAMES coordinate=$COORDINATE covariate=$COVARIATE --resources mem_gb=$MEMGB
+snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR \
+seed=$SEED group=$GROUP colnames=$COLNAMES \
+coordinate=$COORDINATE \
+covariate=$COVARIATE input_sparse=$INPUT_SPARSE \
+--resources mem_gb=$MEMGB

@@ -36,10 +36,16 @@ if COVARIATE != "None":
 	if not(is_file):
 		raise FileNotFoundError("Please check the file for covariate exists")
 
+INPUT_SPARSE = config.get("input_sparse", "None")
+if INPUT_SPARSE == "None":
+	INPUT_SPARSE = "FALSE"
+else:
+	INPUT_SPARSE = str(INPUT_SPARSE)
+
 COORDINATE = config.get("coordinate", "None")
 
 # Docker Container
-container: 'docker://koki/landscaper_component:20240705'
+container: 'docker://koki/landscaper_component:20240802'
 
 # All Rules
 rule all:
@@ -80,7 +86,7 @@ rule check_input:
 	log:
 		OUTDIR + '/logs/check_input.log'
 	shell:
-		'src/check_input.sh {input} {output} >& {log}'
+		'src/check_input.sh {input} {output} {INPUT_SPARSE} >& {log}'
 
 #############################################################
 # Binarization
@@ -92,13 +98,13 @@ rule binarization:
 		OUTDIR + '/CHECK_BINARY',
 		OUTDIR + '/CHECK_ONE_minusONE'
 	output:
-		OUTDIR + '/BIN_DATA.tsv'
+		OUTDIR + '/BIN_DATA'
 	benchmark:
 		OUTDIR + '/benchmarks/binarization.txt'
 	log:
 		OUTDIR + '/logs/binarization.log'
 	shell:
-		'src/binarization.sh {input} {output} >& {log}'
+		'src/binarization.sh {input} {output} {INPUT_SPARSE} >& {log}'
 
 #############################################################
 # Parameter estimation for Energy Landscape
@@ -106,7 +112,7 @@ rule binarization:
 #############################################################
 rule estimate_ising:
 	input:
-		OUTDIR + '/BIN_DATA.tsv'
+		OUTDIR + '/BIN_DATA'
 	output:
 		OUTDIR + '/Allstates.tsv',
 		OUTDIR + '/Freq.tsv',
@@ -120,7 +126,7 @@ rule estimate_ising:
 	log:
 		OUTDIR + '/logs/estimate_ising.log'
 	shell:
-		'src/estimate_ising.sh {input} {output} {COVARIATE} >& {log}'
+		'src/estimate_ising.sh {input} {output} {COVARIATE} {INPUT_SPARSE} >& {log}'
 
 rule plot_parameters:
 	input:
@@ -149,7 +155,7 @@ rule plot_parameters:
 rule ratio_group:
 	input:
 		OUTDIR + '/Allstates.tsv',
-		OUTDIR + '/BIN_DATA.tsv'
+		OUTDIR + '/BIN_DATA'
 	output:
 		OUTDIR + '/ratio_group.tsv'
 	benchmark:

@@ -40,8 +40,10 @@
 .fontconfig
 .snakemake
 data/IsingGen
-output
+output*
 report
 logs
 benchmarks
 .conda
+*.tsv
+hoge*

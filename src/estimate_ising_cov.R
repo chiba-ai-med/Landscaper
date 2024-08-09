@@ -1,5 +1,6 @@
 source("src/Functions.R")
 
+# Arguments
 args <- commandArgs(trailingOnly = TRUE)
 infile <- args[1]
 outfile1 <- args[2]
@@ -12,21 +13,33 @@ outfile7 <- args[8]
 covfile <- args[9]
 
 # Load
-data <- as.matrix(read.table(infile, header=FALSE))
+data_original <- as.matrix(read.table(infile, header=FALSE))
+cov_data <- as.matrix(read.table(covfile, header=FALSE))
+
+# {-1,1} => {0,1}
+data_bin <- data_original
+data_bin[which(data_bin == -1)] <- 0
 
 # Fitting
-res <- EstimateIsing(data, method="uni")
-# {h,J} Parameter
-h <- res$thresholds
-J <- res$graph
+res <- runSA(ocmat=data_bin, enmat=cov_data, threads=1, qth=10^-3)
+
+# {h*,J*} Parameter
+h_ <- res[[1]][, 1]
+g_ <- res[[1]][, 2:(ncol(cov_data)+1)]
+J_ <- res[[1]][, (ncol(cov_data)+2):ncol(res[[1]])]
+
+# {0,1} => {-1,1}
+res2 <- LinTransform(graph=J_, thresholds=h_, from=c(0,1), to=c(-1,1))
+h <- res2$thresholds
+J <- res2$graph
 
 # Allstates
 Allstates <- do.call(expand.grid,
-	lapply(1:ncol(data), function(x)c(-1,1)))
+	lapply(1:ncol(data_original), function(x)c(-1,1)))
 
 # Frequency
 Freq <- apply(Allstates, 1, function(x){
-	apply(data, 1, function(xx){
+	apply(data_original, 1, function(xx){
 		all(x == xx)
 	}) |> which() |> length()
 })
