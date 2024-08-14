@@ -62,7 +62,7 @@ net = (raw_net + raw_net') / 2
 
 # {0,1} => {-1,1}
 uniqval = sort(unique(data_sparse))
-res = MyFunctionsModule.LinTransform(net, thresholds, from=(0,1), to=(-1, 1))
+res = MyFunctionsModule.LinTransform(net, thresholds, from=(0,1), to=(-1,1))
 h = vec(res["thresholds"])
 J = res["graph"]
 
