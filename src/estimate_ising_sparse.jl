@@ -62,7 +62,7 @@ net = (raw_net + raw_net') / 2
 
 # {0,1} => {-1,1}
 uniqval = sort(unique(data_sparse))
-res = MyFunctionsModule.LinTransform(net, thresholds, from=(0,1), to=(uniqval[1], uniqval[2]))
+res = MyFunctionsModule.LinTransform(net, thresholds, from=(0,1), to=(-1, 1))
 h = vec(res["thresholds"])
 J = res["graph"]
 
@@ -84,8 +84,8 @@ end
 # Empirical Probability
 P_emp = Freq ./ sum(Freq)
 
-# Allstates (0,1)
-Allstates = map(x -> (x .+ 1) .÷ 2, Allstates)
+# Allstates {0,1} => {-1,1}
+Allstates = map(x -> (2 .* x) .- 1, Allstates)
 
 # Hamiltonian
 E = [MyFunctionsModule.H(J, s, h) for s in eachrow(Allstates)]

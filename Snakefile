@@ -121,6 +121,8 @@ rule estimate_ising:
 		OUTDIR + '/J.tsv',
 		OUTDIR + '/E.tsv',
 		OUTDIR + '/P_est.tsv'
+	resources:
+		mem_mb=200000
 	benchmark:
 		OUTDIR + '/benchmarks/estimate_ising.txt'
 	log:
