@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.6.0...v1.6.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* Debug for the consistency between {0,1} and {-1,1} ([1047871](https://github.com/chiba-ai-med/Landscaper/commit/10478711bd48f79a66ed980dc53043c6861b8199))
+* Debug for the consistency between {0,1} and {-1,1} ([cb8d43a](https://github.com/chiba-ai-med/Landscaper/commit/cb8d43a232615104be3c817b0965c6bbb1a528e9))
+
 ## [1.6.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.5.0...v1.6.0) (2024-08-09)
 
 
