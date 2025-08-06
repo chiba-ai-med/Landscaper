@@ -45,7 +45,7 @@ else:
 COORDINATE = config.get("coordinate", "None")
 
 # Docker Container
-container: 'docker://koki/landscaper_component:20240802'
+container: 'docker://koki/landscaper_component:20240827'
 
 # All Rules
 rule all:
@@ -81,6 +81,8 @@ rule check_input:
 		OUTDIR + '/CHECK_LARGE_DATA',
 		OUTDIR + '/CHECK_BINARY',
 		OUTDIR + '/CHECK_ONE_minusONE'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/check_input.txt'
 	log:
@@ -99,6 +101,8 @@ rule binarization:
 		OUTDIR + '/CHECK_ONE_minusONE'
 	output:
 		OUTDIR + '/BIN_DATA'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/binarization.txt'
 	log:
@@ -122,7 +126,7 @@ rule estimate_ising:
 		OUTDIR + '/E.tsv',
 		OUTDIR + '/P_est.tsv'
 	resources:
-		mem_mb=200000
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/estimate_ising.txt'
 	log:
@@ -144,6 +148,8 @@ rule plot_parameters:
 		OUTDIR + '/plot/Freq_Prob_Energy.png',
 		OUTDIR + '/plot/h.png',
 		OUTDIR + '/plot/J.png'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/plot_parameters.txt'
 	log:
@@ -160,12 +166,14 @@ rule ratio_group:
 		OUTDIR + '/BIN_DATA'
 	output:
 		OUTDIR + '/ratio_group.tsv'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/ratio_group.txt'
 	log:
 		OUTDIR + '/logs/ratio_group.log'
 	shell:
-		'src/ratio_group.sh {input} {output} {GROUP} >& {log}'
+		'src/ratio_group.sh {input} {output} {GROUP} {INPUT_SPARSE} >& {log}'
 
 rule major_group:
 	input:
@@ -174,6 +182,8 @@ rule major_group:
 	output:
 		OUTDIR + '/major_group.tsv',
 		OUTDIR + '/Allstates_major_group.tsv'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/major_group.txt'
 	log:
@@ -187,6 +197,8 @@ rule plot_ratio_group:
 	output:
 		OUTDIR + '/plot/ratio_group.png',
 		OUTDIR + '/plot/ratio_group_legend.png'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/plot_ratio_group.txt'
 	log:
@@ -208,6 +220,8 @@ rule status_network:
 		OUTDIR + '/Basin.tsv',
 		OUTDIR + '/Coordinate.tsv',
 		OUTDIR + '/igraph.RData'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/status_network.txt'
 	log:
@@ -222,6 +236,8 @@ rule plot_basin:
 		OUTDIR + '/Allstates_major_group.tsv'
 	output:
 		OUTDIR + '/plot/Basin.png'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/plot_basin.txt'
 	log:
@@ -249,6 +265,8 @@ rule plot_status_network:
 		OUTDIR + '/plot/StatusNetwork_State.png',
 		OUTDIR + '/plot/StatusNetwork_State_legend.png',
 		OUTDIR + '/plot/StatusNetwork_Basin.png'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/plot_status_network.txt'
 	log:
@@ -268,6 +286,8 @@ rule plot_landscape:
 		OUTDIR + '/igraph.RData'
 	output:
 		OUTDIR + '/plot/Landscape.png'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/plot_landscape.txt'
 	log:
@@ -285,6 +305,8 @@ rule energy_barrier:
 		OUTDIR + '/Basin.tsv'
 	output:
 		OUTDIR + '/EnergyBarrier.tsv'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/energy_barrier.txt'
 	log:
@@ -300,6 +322,8 @@ rule dendrogram:
 		OUTDIR + '/Allstates_major_group.tsv'
 	output:
 		OUTDIR + '/dendrogram.RData'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/dendrogram.txt'
 	log:
@@ -313,6 +337,8 @@ rule plot_discon_graph:
 	output:
 		OUTDIR + '/plot/discon_graph_1.png',
 		OUTDIR + '/plot/discon_graph_2.png'
+	resources:
+		mem_mb=1000000
 	benchmark:
 		OUTDIR + '/benchmarks/plot_discon_graph.txt'
 	log:
