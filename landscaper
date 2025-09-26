@@ -44,7 +44,7 @@ COORDINATE="None"
 COVARIATE="None"
 INPUT_SPARSE="FALSE"
 MEMGB=10
-VERSION="v1.6.2"
+VERSION="v1.6.3"
 
 # Command Argument Parsing
 while getopts i:o:c:s:g:l:d:e:p:m:h-:v- opt; do

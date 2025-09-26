@@ -31,6 +31,7 @@ J_ <- res[[1]][, (ncol(cov_data)+2):ncol(res[[1]])]
 # {0,1} => {-1,1}
 res2 <- LinTransform(graph=J_, thresholds=h_, from=c(0,1), to=c(-1,1))
 h <- res2$thresholds
+g <- g_ / 2
 J <- res2$graph
 
 # Allstates
@@ -61,3 +62,4 @@ write.table(h, outfile4, quote=FALSE, row.names=FALSE, col.names=FALSE)
 write.table(J, outfile5, quote=FALSE, row.names=FALSE, col.names=FALSE)
 write.table(E, outfile6, quote=FALSE, row.names=FALSE, col.names=FALSE)
 write.table(P_est, outfile7, quote=FALSE, row.names=FALSE, col.names=FALSE)
+write.table(g, file.path(dirname(outfile1, "g.txt")), quote=FALSE, row.names=FALSE, col.names=FALSE)
