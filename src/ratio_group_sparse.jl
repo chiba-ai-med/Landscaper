@@ -8,77 +8,70 @@ infile1  = ARGS[1]
 infile2  = ARGS[2]
 outfile   = ARGS[3]
 groupfile = ARGS[4] 
-# infile1 = "plot/exact_ooc_pca_sparse_bincoo/Landscaper/7/Allstates.tsv"
-# infile2 = "plot/exact_ooc_pca_sparse_bincoo/Landscaper/7/BIN_DATA"
-# groupfile = "group.txt"
+# infile1 = "output_sparse/Allstates.tsv"
+# infile2 = "output_sparse/BIN_DATA"
+# groupfile = "output_sparse/group.tsv"
+
+# 任意の空白区切りを「タブ連結」に統一（R側の正規化と同等）
+normalize_state(s::String) = join(split(strip(s)), '\t')
 
 # Load
-Allstates = readlines(infile1)  # e.g., "1\t-1"
-X = mmread(infile2)  # Sparse（N × M）
-group = vec(readdlm(groupfile, String))  # Group Vector: N
-groups = sort(unique(group))
+Allstates_raw = readlines(infile1)
+Allstates     = map(normalize_state, Allstates_raw)   # 例: "-1\t-1\t1"
+X = mmread(infile2)                                   # Sparse CSC, N×M
+group = strip.(vec(readdlm(groupfile, String)))       # 1列のラベル
 
-# Size
+# Size / sanity
 N, M = size(X)
+length(group) == N || error("group の行数($(length(group)))が BIN_DATA($(N)) と一致しない")
 
-# State Name → Row Index
-state_index = Dict(s => i for (i, s) in enumerate(Allstates))
-group_index = Dict(g => i for (i, g) in enumerate(groups))
+# 行は Allstates の順を厳守
+state_index = Dict{String,Int}(s => i for (i, s) in enumerate(Allstates))
 
-# Step 1: Generate State Labels
+# 生成: 各行の {-1,1} をタブ連結の文字列へ（例: "-1\t-1\t1"）
 state_labels = Vector{String}(undef, N)
 for i in 1:N
-    if i % 10000000 == 0
-        println("Processing row $i of $(size(X, 1))")
+    if i % 10_000_000 == 0
+        println("Building state label $i / $N")
     end
     row_vals = fill("-1", M)
-    for j in findnz(X[i, :])[1]
+    nzj = findnz(X[i, :])[1]  # 非ゼロ列のインデックス
+    @inbounds for j in nzj
         row_vals[j] = "1"
     end
     state_labels[i] = join(row_vals, '\t')
 end
 
-# Step 2: Cross-tabulation (state × group) matrix construction
-state_freq = zeros(Int, length(state_index), length(group_index))
+# グループ集合（ソート後に全ゼロ列は落とす）
+groups_sorted = sort(unique(group))
+group_index_all = Dict{String,Int}(g => i for (i, g) in enumerate(groups_sorted))
+
+# 集計 (state × group_all)
+state_freq = zeros(Int, length(state_index), length(group_index_all))
 for i in 1:N
-    if i % 10000000 == 0
-        println("Processing row $i of $(size(X, 1))")
+    if i % 10_000_000 == 0
+        println("Counting row $i / $N")
     end
     s = state_labels[i]
     g = group[i]
-    haskey(state_index, s) || continue
-    haskey(group_index, g) || continue
-    rowidx = state_index[s]
-    colidx = group_index[g]
-    state_freq[rowidx, colidx] += 1
+    haskey(state_index, s) || continue  # Allstatesに無い状態は無視（R同等）
+    state_freq[state_index[s], group_index_all[g]] += 1
 end
 
-# Step 3: Post-processing
-state_names_sorted = sort(collect(keys(state_index)))  # "-1\t1" など
-group_names_sorted = sort(collect(keys(group_index)))  # "A", "B", ...
-num_states = length(state_names_sorted)
-num_groups = length(group_names_sorted)
+# 列和=0 のグループを除外（R出力に合わせる）
+colsum = [sum(@view state_freq[:, j]) for j in 1:size(state_freq, 2)]
+nonzero_cols = findall(>(0), colsum)
+isempty(nonzero_cols) && error("全グループで列和=0。Allstates と BIN_DATA の整合を確認してください。")
+group_names_final = groups_sorted[nonzero_cols]
 
-# Output Table
-table = Matrix{String}(undef, num_states + 1, num_groups + 1)
-
-# Header Row
-table[1, 1] = "state"
-for j in 1:num_groups
-    table[1, j + 1] = group_names_sorted[j]
-end
-
-# Data Section
-for i in 1:num_states
-    s = state_names_sorted[i]
-    table[i + 1, 1] = s
-    rowidx = state_index[s]
-    for j in 1:num_groups
-        g = group_names_sorted[j]
-        colidx = group_index[g]
-        table[i + 1, j + 1] = string(state_freq[rowidx, colidx])
+# 出力（R準拠）
+# 先頭行：グループ名のみ（スペース区切り）
+# 各行： state(タブを含む文字列) + スペース + 各グループ頻度（スペース区切り）
+open(outfile, "w") do io
+    write(io, join(group_names_final, " ") * "\n")
+    for s in Allstates
+        rowidx = state_index[s]
+        counts = (string(state_freq[rowidx, group_index_all[g]]) for g in group_names_final)
+        write(io, s * " " * join(collect(counts), " ") * "\n")
     end
 end
-
-# Save
-writedlm(outfile, table, '\t')

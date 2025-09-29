@@ -5,6 +5,9 @@ infile1 <- args[1]
 infile2 <- args[2]
 outfile <- args[3]
 group_file <- args[4]
+# infile1 = "output_seurat_beta0/Allstates.tsv"
+# infile2 = "output_seurat_beta0/BIN_DATA.tsv"
+# group_file = "output_seurat_beta0/group.tsv"
 
 # Load
 Allstates <- read.delim(infile1, header=FALSE, sep="X")
