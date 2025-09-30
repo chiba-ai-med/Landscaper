@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.7.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.6.4...v1.7.0) (2025-09-30)
+
+
+### Features
+
+* debug ratio_group ([0bc68fa](https://github.com/chiba-ai-med/Landscaper/commit/0bc68fa0e995c331036eac946a55df2e6b923702))
+* debug ratio_group ([510352b](https://github.com/chiba-ai-med/Landscaper/commit/510352bb137119f43c743c5b108c5881ca84e794))
+* debug test_cov ([6fcfb38](https://github.com/chiba-ai-med/Landscaper/commit/6fcfb3847142616b8c9ec2c3a8e3c0becf81f803))
+
+
+### Bug Fixes
+
+* test_cov ([a788594](https://github.com/chiba-ai-med/Landscaper/commit/a7885949c701f88ceafd54a10c9570514974624d))
+
 ## [1.6.4](https://github.com/chiba-ai-med/Landscaper/compare/v1.6.3...v1.6.4) (2025-09-26)
 
 
