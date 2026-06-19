@@ -6,8 +6,8 @@ setwd("../")
 Allstates <- as.matrix(read.table("output/Allstates.tsv", header=FALSE))
 # Size: States × Variables
 expect_equal(dim(Allstates), c(2^7, 7))
-# Value: Binary
-expect_equal(length(unique(as.vector(Allstates))), 2)
+# Value: Binary {-1, 1} (status_network neighbor detection requires +/-1, not 0/1)
+expect_equal(sort(unique(as.vector(Allstates))), c(-1, 1))
 
 #######################################
 # Freq.tsv

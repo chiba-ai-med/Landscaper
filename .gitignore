@@ -47,3 +47,4 @@ benchmarks
 .conda
 *.tsv
 hoge*
+CLAUDE.md
