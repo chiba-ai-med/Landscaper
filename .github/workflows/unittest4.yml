@@ -14,6 +14,8 @@ jobs:
         steps:
             - name: checkout code
               uses: actions/checkout@v3
+            - name: Build landscaper image from current source (avoid stale :main pull)
+              run: docker build -t ghcr.io/chiba-ai-med/landscaper:main .
             - name: src/test_cov.sh
               run: |
                   echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u kokitsuyuzaki --password-stdin && src/test_cov.sh
