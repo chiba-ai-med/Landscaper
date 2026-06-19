@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/chiba-ai-med/Landscaper/compare/v1.7.0...v1.7.1) (2026-06-19)
+
+
+### Bug Fixes
+
+* correct basin (local-minima) extraction in status_network ([e91a9eb](https://github.com/chiba-ai-med/Landscaper/commit/e91a9eb708ff9d62be47cd62654fd621eac5b5c3))
+
 ## [1.7.0](https://github.com/chiba-ai-med/Landscaper/compare/v1.6.4...v1.7.0) (2025-09-30)
 
 
